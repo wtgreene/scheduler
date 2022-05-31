@@ -74,7 +74,7 @@ public class Student {
 		
 		// throw exception if null or empty string
 		if (firstName == null || "".equals(firstName)) {
-			throw new IllegalArgumentException("Invalid first name.");
+			throw new IllegalArgumentException("Invalid first name");
 		}
 		
 		this.firstName = firstName;
@@ -98,7 +98,7 @@ public class Student {
 		
 		// throw exception if null or empty string
 		if (lastName == null || "".equals(lastName)) {
-			throw new IllegalArgumentException("Invalid last name.");
+			throw new IllegalArgumentException("Invalid last name");
 		}
 		
 		this.lastName = lastName;
@@ -122,7 +122,7 @@ public class Student {
 		
 		// throw exception if null or empty string
 		if (id == null || "".equals(id)) {
-			throw new IllegalArgumentException("Invalid id.");
+			throw new IllegalArgumentException("Invalid id");
 		}
 		
 		this.id = id;
@@ -147,18 +147,18 @@ public class Student {
 		
 		// throw exception if null or empty string
 		if (email == null || "".equals(email)) {
-			throw new IllegalArgumentException("Invalid email.");
+			throw new IllegalArgumentException("Invalid email");
 		}
 		
 		// throw exception if no "@" or "."
 		if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
-			throw new IllegalArgumentException("Invalid email.");
+			throw new IllegalArgumentException("Invalid email");
 		}
 		
 		// throw exception if last ‘.’ character in the email string 
 		// is earlier than the index of the first ‘@’ character
 		if (email.lastIndexOf('.') < email.indexOf('@')) {
-			throw new IllegalArgumentException("Invalid email.");
+			throw new IllegalArgumentException("Invalid email");
 		}
 		
 		this.email = email;
@@ -182,7 +182,7 @@ public class Student {
 		
 		// throw exception if null or empty string
 		if (password == null || "".equals(password)) {
-			throw new IllegalArgumentException("Invalid password.");
+			throw new IllegalArgumentException("Invalid password");
 		}
 		
 		this.password = password;
@@ -206,7 +206,7 @@ public class Student {
 		
 		// throw exception if outside of credit range
 		if (maxCredits < MIN_CREDITS || maxCredits > MAX_CREDITS) {
-			throw new IllegalArgumentException("Invalid max credits.");
+			throw new IllegalArgumentException("Invalid max credits");
 		}
 		
 		this.maxCredits = maxCredits;
