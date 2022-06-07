@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -15,7 +14,7 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import edu.ncsu.csc216.pack_scheduler.user.Student;
+//import edu.ncsu.csc216.pack_scheduler.user.Student;
 
 /**
  * Tests StudentDirectory.

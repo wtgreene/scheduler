@@ -102,7 +102,7 @@ class StudentRecordIOTest {
 		ArrayList<Student> students = StudentRecordIO.readStudentRecords(filepath);
 		
 		// testing same length
-		assertTrue(students.size() == validStudents.length);
+		assertEquals(students.size(), validStudents.length);
 			
 		// testing individual items
 		for (int i = 0; i < validStudents.length; i++) {
@@ -117,12 +117,15 @@ class StudentRecordIOTest {
 	}
 
 	@Test
-	void testWriteStudentRecords() {
+	void testWriteStudentRecords() throws IOException {
 		ArrayList<Student> students = new ArrayList<Student>();
 		students.add(new Student("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", hashPW, 15));
 		
 		Exception exception = assertThrows(IOException.class, 
 				() -> StudentRecordIO.writeStudentRecords("/home/sesmith5/actual_student_records.txt", students));
 		assertEquals("/home/sesmith5/actual_student_records.txt (Permission denied)", exception.getMessage());
+		
+		StudentRecordIO.writeStudentRecords("test-files/new.txt", students);
+		checkFiles("test-files/expected_student_records.txt", "test-files/new.txt");
 	}
 }
