@@ -1,9 +1,11 @@
 package edu.ncsu.csc216.pack_scheduler.directory;
 
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -12,6 +14,8 @@ import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.pack_scheduler.user.Student;
 
 /**
  * Tests StudentDirectory.
@@ -88,6 +92,11 @@ public class StudentDirectoryTest {
 		//Test valid file
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
+		
+		// Test invalid file
+		Exception e = assertThrows(IllegalArgumentException.class, () -> sd.loadStudentsFromFile("not valid"));
+		assertEquals("Unable to read file not valid", e.getMessage());
+		
 	}
 
 	/**
@@ -104,6 +113,15 @@ public class StudentDirectoryTest {
 		assertEquals(FIRST_NAME, studentDirectory[0][0]);
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals(ID, studentDirectory[0][2]);
+		
+		// Adding new tests ...
+		
+		// PW
+		Exception e1 = assertThrows(IllegalArgumentException.class, () -> sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, null, PASSWORD, MAX_CREDITS));
+		assertEquals("Invalid password", e1.getMessage());
+		
+//		sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 1);
+//		assertEquals(sd.get(1).getMaxCredits() == Student.MAX_CREDITS);
 	}
 
 	/**
