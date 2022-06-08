@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests Student.
+ * @author Will Greene
+ *
+ */
 class StudentTest {
 
 	/** student's first name */
@@ -19,6 +24,9 @@ class StudentTest {
 	/** student's max credits */
 	private static final int MAX_CREDITS = 15;
 
+	/**
+	 * Tests Student constructor (includes max credits).
+	 */
 	@Test
 	void testStudentStringStringStringStringStringInt() {
 
@@ -87,6 +95,9 @@ class StudentTest {
 		assertEquals("Invalid max credits", e15.getMessage());
 	}
 
+	/**
+	 * Tests Student constructor (does not include max credits).
+	 */
 	@Test
 	void testStudentStringStringStringStringString() {
 		
@@ -156,6 +167,9 @@ class StudentTest {
 		assertEquals("Invalid max credits", e15.getMessage());
 	}
 
+	/**
+	 * Tests Student.setFirstName().
+	 */
 	@Test
 	void testSetFirstName() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -175,6 +189,9 @@ class StudentTest {
 		assertEquals(FIRST_NAME + 1, s.getFirstName());
 	}
 
+	/**
+	 * Tests Student.setLastName().
+	 */
 	@Test
 	void testSetLastName() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -194,6 +211,9 @@ class StudentTest {
 		assertEquals(LAST_NAME + 1, s.getLastName());
 	}
 
+	/**
+	 * Tests Student.setEmail().
+	 */
 	@Test
 	void testSetEmail() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -228,6 +248,9 @@ class StudentTest {
 		assertEquals(EMAIL + 1, s.getEmail());
 	}
 
+	/**
+	 * Tests Student.setPassword().
+	 */
 	@Test
 	void testSetPassword() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -247,6 +270,9 @@ class StudentTest {
 		assertEquals(PASSWORD + 1, s.getPassword());
 	}
 
+	/**
+	 * Tests Student.setMaxCredits().
+	 */
 	@Test
 	void testSetMaxCredits() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -265,7 +291,10 @@ class StudentTest {
 		assertEquals("Invalid max credits", e2.getMessage());
 		assertEquals(MAX_CREDITS + 1, s.getMaxCredits());
 	}
-
+	
+	/**
+	 * Tests Student.equals().
+	 */
 	@Test
 	void testEqualsObject() {
 		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -291,6 +320,9 @@ class StudentTest {
 		assertTrue(s1.equals(s9));
 	}
 	
+	/**
+	 * Tests Student.hashCode().
+	 */
 	@Test
 	void testHashCode() {
 		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
@@ -312,6 +344,9 @@ class StudentTest {
 		assertNotEquals(s1.hashCode(), s8.hashCode());
 	}
 
+	/**
+	 * Tests Student.toString().
+	 */
 	@Test
 	void testToString() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);

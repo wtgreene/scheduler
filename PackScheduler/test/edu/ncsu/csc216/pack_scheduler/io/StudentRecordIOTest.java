@@ -78,6 +78,10 @@ class StudentRecordIOTest {
 		}
 	}
 
+	/**
+	 * Encodes passwords for each Student.
+	 * @throws Exception if no such algorithm
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 	    try {
@@ -94,6 +98,10 @@ class StudentRecordIOTest {
 	    }
 	}
 
+	/**
+	 * Tests StudentRecordIO.readStudentRecords().
+	 * @throws FileNotFoundException if file not found
+	 */
 	@Test
 	void testReadStudentRecords() throws FileNotFoundException {
 		String filepath = "test-files/student_records.txt";
@@ -116,6 +124,10 @@ class StudentRecordIOTest {
 		assertTrue(students2.isEmpty());
 	}
 
+	/**
+	 * Tests StudentRecordIO.writeStudentRecords().
+	 * @throws IOException if can't write to file
+	 */
 	@Test
 	void testWriteStudentRecords() throws IOException {
 		ArrayList<Student> students = new ArrayList<Student>();
