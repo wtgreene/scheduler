@@ -6,7 +6,7 @@ import java.util.Objects;
  * Assembles information for a Student
  * @author Will Greene
  */
-public class Student {
+public class Student /* implements Comparable<Student> */ {
 	
 	/** minimum number of credits for a student */
 	public static final int MIN_CREDITS = 3;
@@ -55,6 +55,10 @@ public class Student {
 	public Student(String firstName, String lastName, String id, String email, String password) {
 		this(firstName, lastName, id, email, password, MAX_CREDITS);
 	}
+	
+//	public int compareTo(Student s) {
+//		return 0;
+//	}
 	
 	/**
 	 * Returns the Student's first name.
