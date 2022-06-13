@@ -5,12 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
  * Reads Course records from text files. Writes a set of CourseRecords to a
@@ -30,9 +30,9 @@ public class StudentRecordIO {
 	 * @return a list of valid Student records
 	 * @throws FileNotFoundException if the file cannot be found or read
 	 */
-	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
+	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName));
-		ArrayList<Student> students = new ArrayList<Student>();
+		SortedList<Student> students = new SortedList<Student>();
 		while (fileReader.hasNextLine()) {
 			try {
 				Student student = processStudent(fileReader.nextLine());
@@ -103,7 +103,7 @@ public class StudentRecordIO {
 	 * @param studentDirectory list of Students to write
 	 * @throws IOException if cannot write to file
 	 */
-	public static void writeStudentRecords(String fileName, ArrayList<Student> studentDirectory) throws IOException {
+	public static void writeStudentRecords(String fileName, SortedList<Student> studentDirectory) throws IOException {
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 
 		for (int i = 0; i < studentDirectory.size(); i++) {

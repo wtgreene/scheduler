@@ -59,23 +59,22 @@ public class SortedListTest {
 		assertEquals(list.get(3), "c");
 		
 		// Test adding a null element
-		list.add(null);
-		assertEquals(list.size(), 5);
+		assertThrows(NullPointerException.class, () -> list.add(null));
+		
+		assertEquals(list.size(), 4);
 		assertEquals(list.get(0), "a");
 		assertEquals(list.get(1), "ab");
 		assertEquals(list.get(2), "banana");
 		assertEquals(list.get(3), "c");
-		assertEquals(list.get(4), null);
 		
 		// Test adding a duplicate element
 		assertThrows(IllegalArgumentException.class, () -> list.add("a"));
 		
-		assertEquals(list.size(), 5);
+		assertEquals(list.size(), 4);
 		assertEquals(list.get(0), "a");
 		assertEquals(list.get(1), "ab");
 		assertEquals(list.get(2), "banana");
 		assertEquals(list.get(3), "c");
-		assertEquals(list.get(4), null);
 	}
 	
 	@Test
@@ -157,7 +156,6 @@ public class SortedListTest {
 		list.add("a");		
 		list.add("b");		
 		list.add("c");
-		list.add(null);
 		
 		// Test various calls to indexOf for elements in the list
 		// and not in the list
@@ -212,13 +210,11 @@ public class SortedListTest {
 		list.add("a");
 		list.add("b");
 		list.add("c");
-		list.add(null);
 		
 		// Test some true and false cases
 		assertTrue(list.contains("a"));
 		assertTrue(list.contains("b"));
 		assertTrue(list.contains("c"));
-		assertTrue(list.contains(null));
 		assertFalse(list.contains("d"));
 	}
 	

@@ -136,9 +136,9 @@ public class StudentDirectoryTest {
 		assertTrue(sd.removeStudent("efrost"));
 		String [][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(9, studentDirectory.length);
-		assertEquals("Lane", studentDirectory[5][0]);
-		assertEquals("Berg", studentDirectory[5][1]);
-		assertEquals("lberg", studentDirectory[5][2]);
+		assertEquals("Zahir", studentDirectory[5][0]); // Expected Lane before SortedList was used
+		assertEquals("King", studentDirectory[5][1]);
+		assertEquals("zking", studentDirectory[5][2]);
 	}
 
 	/**

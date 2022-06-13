@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Scanner;
 
@@ -15,29 +14,32 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc217.collections.list.SortedList;
 
 class StudentRecordIOTest {
 	
+	// validStudent variables renamed after using SortedList
+	
 	/** row 0 of student_records.txt */
-	private String validStudent0 = "Zahir,King,zking,orci.Donec@ametmassaQuisque.com,pw,15";
+	private String validStudent6 = "Zahir,King,zking,orci.Donec@ametmassaQuisque.com,pw,15";
 	/** row 1 of student_records.txt */
-	private String validStudent1 = "Cassandra,Schwartz,cschwartz,semper@imperdietornare.co.uk,pw,4";
+	private String validStudent8 = "Cassandra,Schwartz,cschwartz,semper@imperdietornare.co.uk,pw,4";
 	/** row 2 of student_records.txt */
-	private String validStudent2 = "Shannon,Hansen,shansen,convallis.est.vitae@arcu.ca,pw,14";
+	private String validStudent4 = "Shannon,Hansen,shansen,convallis.est.vitae@arcu.ca,pw,14";
 	/** row 3 of student_records.txt */
-	private String validStudent3 = "Demetrius,Austin,daustin,Curabitur.egestas.nunc@placeratorcilacus.co.uk,pw,18";
+	private String validStudent0 = "Demetrius,Austin,daustin,Curabitur.egestas.nunc@placeratorcilacus.co.uk,pw,18";
 	/** row 4 of student_records.txt */
-	private String validStudent4 = "Raymond,Brennan,rbrennan,litora.torquent@pellentesquemassalobortis.ca,pw,12";
+	private String validStudent2 = "Raymond,Brennan,rbrennan,litora.torquent@pellentesquemassalobortis.ca,pw,12";
 	/** row 5 of student_records.txt */
-	private String validStudent5 = "Emerald,Frost,efrost,adipiscing@acipsumPhasellus.edu,pw,3";
+	private String validStudent3 = "Emerald,Frost,efrost,adipiscing@acipsumPhasellus.edu,pw,3";
 	/** row 6 of student_records.txt */
-	private String validStudent6 = "Lane,Berg,lberg,sociis@non.org,pw,14";
+	private String validStudent1 = "Lane,Berg,lberg,sociis@non.org,pw,14";
 	/** row 7 of student_records.txt */
-	private String validStudent7 = "Griffith,Stone,gstone,porta@magnamalesuadavel.net,pw,17";
+	private String validStudent9 = "Griffith,Stone,gstone,porta@magnamalesuadavel.net,pw,17";
 	/** row 8 of student_records.txt */
-	private String validStudent8 = "Althea,Hicks,ahicks,Phasellus.dapibus@luctusfelis.com,pw,11";
+	private String validStudent5 = "Althea,Hicks,ahicks,Phasellus.dapibus@luctusfelis.com,pw,11";
 	/** row 9 of student_records.txt */
-	private String validStudent9 = "Dylan,Nolan,dnolan,placerat.Cras.dictum@dictum.net,pw,5";
+	private String validStudent7 = "Dylan,Nolan,dnolan,placerat.Cras.dictum@dictum.net,pw,5";
 
 	/** list form of student_records.txt */
 	private String [] validStudents = {validStudent0, validStudent1, validStudent2, validStudent3, validStudent4, validStudent5,
@@ -107,7 +109,7 @@ class StudentRecordIOTest {
 		String filepath = "test-files/student_records.txt";
 		String filepath2 = "test-files/invalid_student_records.txt";
 		
-		ArrayList<Student> students = StudentRecordIO.readStudentRecords(filepath);
+		SortedList<Student> students = StudentRecordIO.readStudentRecords(filepath);
 		
 		// testing same length
 		assertEquals(students.size(), validStudents.length);
@@ -120,7 +122,7 @@ class StudentRecordIOTest {
 		}
 		
 		// testing invalid
-		ArrayList<Student> students2 = StudentRecordIO.readStudentRecords(filepath2);
+		SortedList<Student> students2 = StudentRecordIO.readStudentRecords(filepath2);
 		assertTrue(students2.isEmpty());
 	}
 
@@ -130,7 +132,7 @@ class StudentRecordIOTest {
 	 */
 	@Test
 	void testWriteStudentRecords() throws IOException {
-		ArrayList<Student> students = new ArrayList<Student>();
+		SortedList<Student> students = new SortedList<Student>();
 		students.add(new Student("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", hashPW, 15));
 		
 		Exception exception = assertThrows(IOException.class, 
