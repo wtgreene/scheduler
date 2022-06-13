@@ -23,6 +23,22 @@ class StudentTest {
 	private static final String PASSWORD = "password";
 	/** student's max credits */
 	private static final int MAX_CREDITS = 15;
+	
+	/**
+	 * Tests Student.compareTo().
+	 */
+	@Test
+	void testCompareTo() {
+		Student s1 = new Student("George", "Washington", "gwashington", "gwashington@ncsu.edu", PASSWORD, MAX_CREDITS);
+		Student s2 = new Student("John", "Adams", "jadams", "jadams@ncsu.edu", PASSWORD, MAX_CREDITS);
+		Student s3 = new Student("Ben", "Franklin", "bfrank", "bfrank@ncsu.edu", PASSWORD, MAX_CREDITS);
+		Student s4 = new Student("Ben", "Franklin", "bfrank", "bfrank@ncsu.edu", PASSWORD, MAX_CREDITS);
+		
+		assertEquals(s1.compareTo(s2), 1);
+		assertEquals(s2.compareTo(s3), -1);
+		assertEquals(s1.compareTo(s3), 1);
+		assertEquals(s3.compareTo(s4), 0);
+	}
 
 	/**
 	 * Tests Student constructor (includes max credits).
