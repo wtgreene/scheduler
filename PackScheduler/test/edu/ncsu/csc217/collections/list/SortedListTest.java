@@ -4,8 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Tests SortedList (from CSC217Collections.jar).
+ * @author Will Greene
+ *
+ */
 public class SortedListTest {
 
+	/**
+	 * Tests SortedList().
+	 */
 	@Test
 	public void testSortedList() {
 		SortedList<String> list = new SortedList<String>();
@@ -31,6 +39,9 @@ public class SortedListTest {
 		assertEquals(list.size(), 11);
 	}
 
+	/**
+	 * Tests add(E).
+	 */
 	@Test
 	public void testAdd() {
 		SortedList<String> list = new SortedList<String>();
@@ -77,6 +88,9 @@ public class SortedListTest {
 		assertEquals(list.get(3), "c");
 	}
 	
+	/**
+	 * Tests get(int).
+	 */
 	@Test
 	public void testGet() {
 		SortedList<String> list = new SortedList<String>();
@@ -101,6 +115,9 @@ public class SortedListTest {
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(list.size()));
 	}
 	
+	/**
+	 * Tests remove(int).
+	 */
 	@Test
 	public void testRemove() {
 		SortedList<String> list = new SortedList<String>();
@@ -145,6 +162,9 @@ public class SortedListTest {
 		assertTrue(list.isEmpty());
 	}
 	
+	/**
+	 * Tests indexOf(E).
+	 */
 	@Test
 	public void testIndexOf() {
 		SortedList<String> list = new SortedList<String>();
@@ -169,6 +189,9 @@ public class SortedListTest {
 		assertThrows(NullPointerException.class, () -> list.indexOf(null));
 	}
 	
+	/**
+	 * Tests clear().
+	 */
 	@Test
 	public void testClear() {
 		SortedList<String> list = new SortedList<String>();
@@ -185,6 +208,9 @@ public class SortedListTest {
 		assertTrue(list.isEmpty());
 	}
 
+	/**
+	 * Tests isEmpty().
+	 */
 	@Test
 	public void testIsEmpty() {
 		SortedList<String> list = new SortedList<String>();
@@ -199,6 +225,9 @@ public class SortedListTest {
 		assertFalse(list.isEmpty());
 	}
 
+	/**
+	 * Tests contains().
+	 */
 	@Test
 	public void testContains() {
 		SortedList<String> list = new SortedList<String>();
@@ -218,6 +247,9 @@ public class SortedListTest {
 		assertFalse(list.contains("d"));
 	}
 	
+	/**
+	 * Tests equals().
+	 */
 	@Test
 	public void testEquals() {
 		SortedList<String> list1 = new SortedList<String>();
@@ -244,6 +276,9 @@ public class SortedListTest {
 		assertFalse(list1.equals(list3));
 	}
 	
+	/**
+	 * Tests hashCode().
+	 */
 	@Test
 	public void testHashCode() {
 		SortedList<String> list1 = new SortedList<String>();
