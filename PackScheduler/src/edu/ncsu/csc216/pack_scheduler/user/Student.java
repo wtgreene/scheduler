@@ -229,13 +229,71 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * Generates a hashCode for Student using all fields.
+	 * Alphabetically compares current student to another, by last name, then first name (if
+	 * necessary), then unity id (if necessary).
 	 * 
-	 * @return hashCode for Student
+	 * @param o Student to compare to
+	 * @return -1 if less than, 0 if equal to, or 1 if greater than Student o
 	 */
 	@Override
-	public int hashCode() {
-		return Objects.hash(email, firstName, id, lastName, maxCredits, password);
+	public int compareTo(Student o) {
+	
+		String last1 = lastName.toLowerCase();
+		String last2 = o.lastName.toLowerCase();
+		String first1 = firstName.toLowerCase();
+		String first2 = o.firstName.toLowerCase();
+		String id1 = id.toLowerCase();
+		String id2 = o.id.toLowerCase();
+	
+		// last name
+		for (int i = 0; i < last1.length(); i++) {
+			if (last1.charAt(i) < last2.charAt(i)) {
+				return -1;
+			} else if (last1.charAt(i) > last2.charAt(i)) {
+				return 1;
+			}
+		}
+	
+		// last name - extra char
+		if (last1.length() < last2.length()) {
+			return -1;
+		} else if (last1.length() > last2.length()) {
+			return 1;
+		}
+	
+		// first name
+		for (int i = 0; i < first1.length(); i++) {
+			if (first1.charAt(i) < first2.charAt(i)) {
+				return -1;
+			} else if (first1.charAt(i) > first2.charAt(i)) {
+				return 1;
+			}
+		}
+	
+		// first name - extra char
+		if (first1.length() < first1.length()) {
+			return -1;
+		} else if (first1.length() > first1.length()) {
+			return 1;
+		}
+	
+		// id
+		for (int i = 0; i < id1.length(); i++) {
+			if (id1.charAt(i) < id2.charAt(i)) {
+				return -1;
+			} else if (id1.charAt(i) > id2.charAt(i)) {
+				return 1;
+			}
+		}
+	
+		// id - extra char
+		if (id1.length() < id2.length()) {
+			return -1;
+		} else if (id1.length() > id2.length()) {
+			return 1;
+		}
+	
+		return 0;
 	}
 
 	/**
@@ -269,70 +327,12 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * Compares current student to another, by last name, then first name (if
-	 * necessary), then unity id (if necessary).
+	 * Generates a hashCode for Student using all fields.
 	 * 
-	 * @param o Student to compare to
-	 * @return -1 if less than, 0 if equal to, or 1 if greater than Student o
+	 * @return hashCode for Student
 	 */
 	@Override
-	public int compareTo(Student o) {
-
-		String last1 = lastName.toLowerCase();
-		String last2 = o.lastName.toLowerCase();
-		String first1 = firstName.toLowerCase();
-		String first2 = o.firstName.toLowerCase();
-		String id1 = id.toLowerCase();
-		String id2 = o.id.toLowerCase();
-
-		// last name
-		for (int i = 0; i < last1.length(); i++) {
-			if (last1.charAt(i) < last2.charAt(i)) {
-				return -1;
-			} else if (last1.charAt(i) > last2.charAt(i)) {
-				return 1;
-			}
-		}
-
-		// last name - extra char
-		if (last1.length() < last2.length()) {
-			return -1;
-		} else if (last1.length() > last2.length()) {
-			return 1;
-		}
-
-		// first name
-		for (int i = 0; i < first1.length(); i++) {
-			if (first1.charAt(i) < first2.charAt(i)) {
-				return -1;
-			} else if (first1.charAt(i) > first2.charAt(i)) {
-				return 1;
-			}
-		}
-
-		// first name - extra char
-		if (first1.length() < first1.length()) {
-			return -1;
-		} else if (first1.length() > first1.length()) {
-			return 1;
-		}
-
-		// id
-		for (int i = 0; i < id1.length(); i++) {
-			if (id1.charAt(i) < id2.charAt(i)) {
-				return -1;
-			} else if (id1.charAt(i) > id2.charAt(i)) {
-				return 1;
-			}
-		}
-
-		// id - extra char
-		if (id1.length() < id2.length()) {
-			return -1;
-		} else if (id1.length() > id2.length()) {
-			return 1;
-		}
-
-		return 0;
+	public int hashCode() {
+		return Objects.hash(email, firstName, id, lastName, maxCredits, password);
 	}
 }

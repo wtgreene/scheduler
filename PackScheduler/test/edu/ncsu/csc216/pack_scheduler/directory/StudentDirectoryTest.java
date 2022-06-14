@@ -1,6 +1,5 @@
 package edu.ncsu.csc216.pack_scheduler.directory;
 
-
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,10 +17,11 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests StudentDirectory.
+ * 
  * @author Sarah Heckman
  */
 public class StudentDirectoryTest {
-	
+
 	/** Valid course records */
 	private final String validTestFile = "test-files/student_records.txt";
 	/** Test first name */
@@ -36,14 +36,15 @@ public class StudentDirectoryTest {
 	private static final String PASSWORD = "pw";
 	/** Test max credits */
 	private static final int MAX_CREDITS = 15;
-	
+
 	/**
 	 * Resets course_records.txt for use in other tests.
+	 * 
 	 * @throws Exception if something fails during setup.
 	 */
 	@Before
-	public void setUp() throws Exception {		
-		//Reset student_records.txt so that it's fine for other needed tests
+	public void setUp() throws Exception {
+		// Reset student_records.txt so that it's fine for other needed tests
 		Path sourcePath = FileSystems.getDefault().getPath("test-files", "expected_full_student_records.txt");
 		Path destinationPath = FileSystems.getDefault().getPath("test-files", "student_records.txt");
 		try {
@@ -59,7 +60,7 @@ public class StudentDirectoryTest {
 	 */
 	@Test
 	public void testStudentDirectory() {
-		//Test that the StudentDirectory is initialized to an empty list
+		// Test that the StudentDirectory is initialized to an empty list
 		StudentDirectory sd = new StudentDirectory();
 		assertFalse(sd.removeStudent("sesmith5"));
 		assertEquals(0, sd.getStudentDirectory().length);
@@ -70,13 +71,13 @@ public class StudentDirectoryTest {
 	 */
 	@Test
 	public void testNewStudentDirectory() {
-		//Test that if there are students in the directory, they 
-		//are removed after calling newStudentDirectory().
+		// Test that if there are students in the directory, they
+		// are removed after calling newStudentDirectory().
 		StudentDirectory sd = new StudentDirectory();
-		
+
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
-		
+
 		sd.newStudentDirectory();
 		assertEquals(0, sd.getStudentDirectory().length);
 	}
@@ -87,15 +88,15 @@ public class StudentDirectoryTest {
 	@Test
 	public void testLoadStudentsFromFile() {
 		StudentDirectory sd = new StudentDirectory();
-				
-		//Test valid file
+
+		// Test valid file
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
-		
+
 		// Test invalid file
 		Exception e = assertThrows(IllegalArgumentException.class, () -> sd.loadStudentsFromFile("not valid"));
 		assertEquals("Unable to read file not valid", e.getMessage());
-		
+
 	}
 
 	/**
@@ -104,21 +105,22 @@ public class StudentDirectoryTest {
 	@Test
 	public void testAddStudent() {
 		StudentDirectory sd = new StudentDirectory();
-		
-		//Test valid Student
+
+		// Test valid Student
 		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
-		String [][] studentDirectory = sd.getStudentDirectory();
+		String[][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(1, studentDirectory.length);
 		assertEquals(FIRST_NAME, studentDirectory[0][0]);
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals(ID, studentDirectory[0][2]);
-		
+
 		// Adding new tests ...
-		
+
 		// PW
-		Exception e1 = assertThrows(IllegalArgumentException.class, () -> sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, null, PASSWORD, MAX_CREDITS));
+		Exception e1 = assertThrows(IllegalArgumentException.class,
+				() -> sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, null, PASSWORD, MAX_CREDITS));
 		assertEquals("Invalid password", e1.getMessage());
-		
+
 //		sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 1);
 //		assertEquals(sd.get(1).getMaxCredits() == Student.MAX_CREDITS);
 	}
@@ -129,12 +131,12 @@ public class StudentDirectoryTest {
 	@Test
 	public void testRemoveStudent() {
 		StudentDirectory sd = new StudentDirectory();
-				
-		//Add students and remove
+
+		// Add students and remove
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
 		assertTrue(sd.removeStudent("efrost"));
-		String [][] studentDirectory = sd.getStudentDirectory();
+		String[][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(9, studentDirectory.length);
 		assertEquals("Zahir", studentDirectory[5][0]); // Expected Lane before SortedList was used
 		assertEquals("King", studentDirectory[5][1]);
@@ -147,16 +149,17 @@ public class StudentDirectoryTest {
 	@Test
 	public void testSaveStudentDirectory() {
 		StudentDirectory sd = new StudentDirectory();
-		
-		//Add a student
+
+		// Add a student
 		sd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
 		assertEquals(1, sd.getStudentDirectory().length);
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 	}
-	
+
 	/**
 	 * Helper method to compare two files for the same contents
+	 * 
 	 * @param expFile expected output
 	 * @param actFile actual output
 	 */
@@ -164,11 +167,11 @@ public class StudentDirectoryTest {
 		try {
 			Scanner expScanner = new Scanner(new FileInputStream(expFile));
 			Scanner actScanner = new Scanner(new FileInputStream(actFile));
-			
+
 			while (expScanner.hasNextLine()) {
 				assertEquals(expScanner.nextLine(), actScanner.nextLine());
 			}
-			
+
 			expScanner.close();
 			actScanner.close();
 		} catch (IOException e) {

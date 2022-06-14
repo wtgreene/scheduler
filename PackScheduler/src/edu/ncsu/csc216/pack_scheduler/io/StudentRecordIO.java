@@ -17,7 +17,6 @@ import edu.ncsu.csc217.collections.list.SortedList;
  * file. CourseRecordIO.java used for reference.
  * 
  * @author Will Greene
- *
  */
 public class StudentRecordIO {
 
