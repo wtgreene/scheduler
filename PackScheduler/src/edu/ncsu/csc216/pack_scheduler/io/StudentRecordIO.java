@@ -28,6 +28,7 @@ public class StudentRecordIO {
 	 * @param fileName file to read Student records from
 	 * @return a list of valid Student records
 	 * @throws FileNotFoundException if the file cannot be found or read
+	 * @throws IllegalArgumentException if fileReader cannot process Student
 	 */
 	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName));

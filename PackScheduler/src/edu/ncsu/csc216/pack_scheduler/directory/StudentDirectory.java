@@ -43,6 +43,7 @@ public class StudentDirectory {
 	 * given file. Throws an IllegalArgumentException if the file cannot be found.
 	 * 
 	 * @param fileName file containing list of students
+	 * @throws IllegalArgumentException if unable to read file
 	 */
 	public void loadStudentsFromFile(String fileName) {
 		try {
@@ -67,6 +68,7 @@ public class StudentDirectory {
 	 * @param repeatPassword student's repeated password
 	 * @param maxCredits     student's max credits.
 	 * @return true if added
+	 * @throws IllegalArgumentException if invalid password or passwords do not match
 	 */
 	public boolean addStudent(String firstName, String lastName, String id, String email, String password,
 			String repeatPassword, int maxCredits) {
@@ -108,6 +110,7 @@ public class StudentDirectory {
 	 * 
 	 * @param toHash the String to hash
 	 * @return the encoded digest of the hash algorithm in base64
+	 * @throws IllegalArgumentException if password cannot be hashed
 	 */
 	private static String hashString(String toHash) {
 		try {
@@ -159,6 +162,7 @@ public class StudentDirectory {
 	 * Saves all students in the directory to a file.
 	 * 
 	 * @param fileName name of file to save students to.
+	 * @throws IllegalArgumentException if unable to write to file
 	 */
 	public void saveStudentDirectory(String fileName) {
 		try {
