@@ -129,12 +129,19 @@ public class CourseCatalogTest {
 		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
 		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
+		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		
 		String[][] catalog = c.getCourseCatalog();
 		
 		assertEquals(catalog[0][0], NAME_2);
 		assertEquals(catalog[0][1], SECTION_2);
+		assertEquals(catalog[0][2], TITLE_2);
+		assertEquals(catalog[0][3], c2.getMeetingString());
 		assertEquals(catalog[1][0], NAME);
 		assertEquals(catalog[1][1], SECTION);
+		assertEquals(catalog[1][2], TITLE);
+		assertEquals(catalog[1][3], c1.getMeetingString());
 	}
 
 	/**

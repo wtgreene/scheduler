@@ -26,10 +26,16 @@ class ActivityTest {
 		
 		Exception e2 = assertThrows(ConflictException.class, () -> a4.checkConflict(a3));
 		assertEquals("Schedule conflict.", e2.getMessage());
-		
-		
 	}
 	
-	
-
+	/**
+	 * Tests Activity.getMeetingString().
+	 */
+	@Test
+	public void testGetMeetingString() {
+		Activity a = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 30, 50);
+		
+		String s = a.getMeetingString();
+		assertEquals(s, "MW 12:30AM-12:50AM");
+	}
 }
