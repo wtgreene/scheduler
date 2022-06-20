@@ -233,6 +233,55 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 	
 	/**
+	 * Populates the rows of the course catalog and student schedule.
+	 * 
+	 * @return course catalog and student schedule
+	 */
+	@Override
+	public String[] getShortDisplayArray() {
+		String[] s = new String[4];
+		s[0] = name;
+		s[1] = section;
+		s[2] = getTitle();
+		s[3] = getMeetingString();
+		return s;
+	}
+
+	/**
+	 * Displays the final schedule.
+	 * 
+	 * @return final schedule
+	 */
+	@Override
+	public String[] getLongDisplayArray() {
+		String[] s = new String[7];
+		s[0] = name;
+		s[1] = section;
+		s[2] = getTitle();
+		s[3] = Integer.toString(credits);
+		s[4] = instructorId;
+		s[5] = getMeetingString();
+		s[6] = "";
+		return s;
+	}
+
+	/**
+	 * Returns when an activity is a duplicate of the current Course.
+	 * 
+	 * @param activity Activity object to compare to
+	 * @return true if duplicate, false if not
+	 */
+	@Override
+	public boolean isDuplicate(Activity activity) {
+		if (activity instanceof Course) {
+			Course c = (Course) activity;
+			return name.equals(c.getName());
+		}
+	
+		return false;
+	}
+
+	/**
 	 * Compares ...
 	 */
 	@Override
@@ -326,17 +375,6 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 
 	/**
-	 * Generates a hashCode for Course using all fields.
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(credits, instructorId, name, section);
-		return result;
-	}
-
-	/**
 	 * Compares a given object to this object for equality on all fields.
 	 */
 	@Override
@@ -370,51 +408,13 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 
 	/**
-	 * Returns when an activity is a duplicate of the current Course.
-	 * 
-	 * @param activity Activity object to compare to
-	 * @return true if duplicate, false if not
+	 * Generates a hashCode for Course using all fields.
 	 */
 	@Override
-	public boolean isDuplicate(Activity activity) {
-		if (activity instanceof Course) {
-			Course c = (Course) activity;
-			return name.equals(c.getName());
-		}
-
-		return false;
-	}
-
-	/**
-	 * Populates the rows of the course catalog and student schedule.
-	 * 
-	 * @return course catalog and student schedule
-	 */
-	@Override
-	public String[] getShortDisplayArray() {
-		String[] s = new String[4];
-		s[0] = name;
-		s[1] = section;
-		s[2] = getTitle();
-		s[3] = getMeetingString();
-		return s;
-	}
-
-	/**
-	 * Displays the final schedule.
-	 * 
-	 * @return final schedule
-	 */
-	@Override
-	public String[] getLongDisplayArray() {
-		String[] s = new String[7];
-		s[0] = name;
-		s[1] = section;
-		s[2] = getTitle();
-		s[3] = Integer.toString(credits);
-		s[4] = instructorId;
-		s[5] = getMeetingString();
-		s[6] = "";
-		return s;
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(credits, instructorId, name, section);
+		return result;
 	}
 }
