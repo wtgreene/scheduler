@@ -41,7 +41,6 @@ public class CourseCatalog {
 	 * permissions are incorrect a File NotFoundException is thrown.
 	 * 
 	 * @param filename file to read Course records from
-	 * @throws FileNotFoundException if the file cannot be found or read
 	 */
 	public void loadCoursesFromFile(String filename) {
 		try {
