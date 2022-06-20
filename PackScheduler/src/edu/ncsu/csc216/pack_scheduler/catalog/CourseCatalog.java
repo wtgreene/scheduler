@@ -101,7 +101,7 @@ public class CourseCatalog {
 	}
 
 	/**
-	 * Returns a Course from the catalog.
+	 * Returns a Course from the catalog. If the Course does not exist, null is returned.
 	 * 
 	 * @param name    Course name
 	 * @param section Course section

@@ -4,16 +4,17 @@
 package edu.ncsu.csc216.pack_scheduler.course;
 
 /**
- * TODO
+ * Checks for a time conflicts.
+ * 
  * @author Will Greene
- *
  */
 public interface Conflict {
 	
 	/**
-	 * TODO
-	 * @param possibleConflictingActivity p
-	 * @throws ConflictException c
+	 * Checks for a time conflict between 2 Activities.
+	 * 
+	 * @param possibleConflictingActivity Activity to compare to
+	 * @throws ConflictException if there is a time conflict
 	 */
 	void checkConflict(Activity possibleConflictingActivity) throws ConflictException;
 	

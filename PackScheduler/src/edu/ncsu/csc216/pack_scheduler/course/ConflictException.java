@@ -4,9 +4,9 @@
 package edu.ncsu.csc216.pack_scheduler.course;
 
 /**
- * TODO
+ * Extends Exception class by providing a custom excecption type.
+ * 
  * @author Will Greene
- *
  */
 public class ConflictException extends Exception {
 
@@ -14,20 +14,18 @@ public class ConflictException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Constructs TODO
-	 * @param message m
+	 * Constructs a ConflictException with a custom message.
+	 * 
+	 * @param message error message to be displayed
 	 */
 	public ConflictException(String message) {
 		super(message);
 	}
 	
 	/**
-	 * Constructs TODO
+	 * Constructs a ConflictException with a default message.
 	 */
 	public ConflictException() {
 		this("Schedule conflict.");
 	}
-	
-	
-
 }

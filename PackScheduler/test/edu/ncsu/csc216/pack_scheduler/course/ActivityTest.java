@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests Activity.
+ * 
+ * @author Will Greene
+ */
 class ActivityTest {
 
 	/**
-	 * TODO
-	 * 
+	 * Tests Activity.checkConflict().
 	 */
 	@Test
 	void testCheckConflict() {

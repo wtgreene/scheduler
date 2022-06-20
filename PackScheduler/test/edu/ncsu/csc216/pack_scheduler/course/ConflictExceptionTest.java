@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /**
- * TODO
+ * Tests ConflictException.java.
+ * 
  * @author Will Greene
- *
  */
 class ConflictExceptionTest {
 
@@ -31,5 +31,4 @@ class ConflictExceptionTest {
 		ConflictException ce = new ConflictException();
 		assertEquals("Schedule conflict.", ce.getMessage());
 	}
-
 }

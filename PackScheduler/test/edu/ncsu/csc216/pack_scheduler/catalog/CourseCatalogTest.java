@@ -154,6 +154,6 @@ public class CourseCatalogTest {
 		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
 		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
-		assertDoesNotThrow(() -> c.saveCourseCatalog("sample_catalog.txt"));
+		assertDoesNotThrow(() -> c.saveCourseCatalog("test-files/sample_catalog.txt"));
 	}
 }
