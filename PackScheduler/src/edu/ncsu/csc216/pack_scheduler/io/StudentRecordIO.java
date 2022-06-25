@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc216.pack_scheduler.user.User;
 import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
@@ -38,7 +39,7 @@ public class StudentRecordIO {
 				Student student = processStudent(fileReader.nextLine());
 				boolean duplicate = false;
 				for (int i = 0; i < students.size(); i++) {
-					Student current = students.get(i);
+					User current = students.get(i);
 					if (student.getId().equals(current.getId())) {
 						duplicate = true;
 						break;

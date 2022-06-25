@@ -202,7 +202,7 @@ class StudentTest {
 	 */
 	@Test
 	void testSetFirstName() {
-		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
 
 		// valid change
 		s.setFirstName(FIRST_NAME + 1);
@@ -224,7 +224,7 @@ class StudentTest {
 	 */
 	@Test
 	void testSetLastName() {
-		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
 
 		// valid change
 		s.setLastName(LAST_NAME + 1);
@@ -246,7 +246,7 @@ class StudentTest {
 	 */
 	@Test
 	void testSetEmail() {
-		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
 
 		// valid change
 		s.setEmail(EMAIL + 1);
@@ -283,7 +283,7 @@ class StudentTest {
 	 */
 	@Test
 	void testSetPassword() {
-		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
 
 		// valid change
 		s.setPassword(PASSWORD + 1);
@@ -343,14 +343,14 @@ class StudentTest {
 	 */
 	@Test
 	void testEqualsObject() {
-		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s3 = new Student(FIRST_NAME + 1, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s4 = new Student(FIRST_NAME, LAST_NAME + 1, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s5 = new Student(FIRST_NAME, LAST_NAME, ID + 1, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s6 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL + 1, PASSWORD, MAX_CREDITS);
-		Student s7 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD + 1, MAX_CREDITS);
-		Student s8 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS + 1);
+		User s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s3 = new Student(FIRST_NAME + 1, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s4 = new Student(FIRST_NAME, LAST_NAME + 1, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s5 = new Student(FIRST_NAME, LAST_NAME, ID + 1, EMAIL, PASSWORD, MAX_CREDITS);
+		User s6 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL + 1, PASSWORD, MAX_CREDITS);
+		User s7 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD + 1, MAX_CREDITS);
+		User s8 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS + 1);
 
 		assertTrue(s1.equals(s2));
 		assertTrue(s2.equals(s1));
@@ -362,7 +362,7 @@ class StudentTest {
 		assertFalse(s1.equals(s7));
 		assertFalse(s1.equals(s8));
 
-		Student s9 = s1;
+		User s9 = s1;
 		assertTrue(s1.equals(s9));
 	}
 
@@ -371,7 +371,7 @@ class StudentTest {
 	 */
 	@Test
 	void testToString() {
-		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
 		assertEquals("firstName,lastName,id,email@ncsu.edu,password,15", s.toString());
 	}
 
@@ -380,14 +380,14 @@ class StudentTest {
 	 */
 	@Test
 	void testHashCode() {
-		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s3 = new Student(FIRST_NAME + 1, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s4 = new Student(FIRST_NAME, LAST_NAME + 1, ID, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s5 = new Student(FIRST_NAME, LAST_NAME, ID + 1, EMAIL, PASSWORD, MAX_CREDITS);
-		Student s6 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL + 1, PASSWORD, MAX_CREDITS);
-		Student s7 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD + 1, MAX_CREDITS);
-		Student s8 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS + 1);
+		User s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s3 = new Student(FIRST_NAME + 1, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s4 = new Student(FIRST_NAME, LAST_NAME + 1, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		User s5 = new Student(FIRST_NAME, LAST_NAME, ID + 1, EMAIL, PASSWORD, MAX_CREDITS);
+		User s6 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL + 1, PASSWORD, MAX_CREDITS);
+		User s7 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD + 1, MAX_CREDITS);
+		User s8 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS + 1);
 
 		assertEquals(s1.hashCode(), s2.hashCode());
 
