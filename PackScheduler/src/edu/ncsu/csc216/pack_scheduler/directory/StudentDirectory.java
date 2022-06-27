@@ -172,5 +172,20 @@ public class StudentDirectory {
 			throw new IllegalArgumentException("Unable to write to file " + fileName);
 		}
 	}
-
+	
+	/**
+	 * Returns a specified student.
+	 * 
+	 * @param id Student's unity id
+	 * @return a specified student
+	 */
+	public Student getStudentById(String id) {
+		for (int i = 0; i < studentDirectory.size(); i++) {
+			if (studentDirectory.get(i).getId().equals(id)) {
+				return studentDirectory.get(i);
+			}
+		}
+		
+		throw new IllegalArgumentException("User doesn't exist.");
+	}
 }

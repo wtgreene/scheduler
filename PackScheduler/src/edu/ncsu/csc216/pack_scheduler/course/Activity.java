@@ -77,7 +77,7 @@ public abstract class Activity implements Conflict {
 	 */
 	public void setMeetingDaysAndTime(String meetingDays, int startTime, int endTime) {
 		if (meetingDays == null || "".equals(meetingDays)) {
-			throw new IllegalArgumentException("Invalid meeting days and times.");
+			throw new IllegalArgumentException("Invalid meeting days.");
 		}
 
 		int startHour = startTime / 100;

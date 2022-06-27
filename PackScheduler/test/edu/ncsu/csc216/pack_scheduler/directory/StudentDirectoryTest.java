@@ -178,5 +178,15 @@ public class StudentDirectoryTest {
 			fail("Error reading files.");
 		}
 	}
-
+	
+	/**
+	 * Tests.StudentDirectory.getStudentById()
+	 */
+	@Test
+	public void testGetStudentById() {
+		StudentDirectory sd = new StudentDirectory();
+		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
+		
+		assertEquals(sd.getStudentById(ID).getId(), ID);
+	}
 }

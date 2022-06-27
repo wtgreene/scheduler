@@ -1,0 +1,5 @@
+private fields - inconsistent indentation, spacing
+private fields - little to no Javadoc
+Constructor - did not declare new CourseCatalog or StudentDirectory objects
+getCurrentUser() method not implemented
+login(String, String) method - if clauses had to be switched (could have been edited as well)
