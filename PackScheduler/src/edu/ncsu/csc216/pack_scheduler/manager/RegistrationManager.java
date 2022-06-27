@@ -116,23 +116,31 @@ public class RegistrationManager {
 	 * @return true if able to login, false if not
 	 */
 	public boolean login(String id, String password) {
-		String localHashPW = hashPW(password);
-
-		if (registrar.getId().equals(id)) {
+		if (id != null) {
+			String localId = id;
+			String localHashPW;
 			
-			if (registrar.getPassword().equals(localHashPW)) {
-				currentUser = registrar;
+			if (password != null) {
+				String localPW = password;
+				localHashPW = hashPW(localPW);
+
+				if (registrar.getId().equals(localId)) {
+
+					if (registrar.getPassword().equals(localHashPW)) {
+						currentUser = registrar;
+						return true;
+					}
+				}
+
+				Student s = studentDirectory.getStudentById(id);
+
+				if (s.getPassword().equals(localHashPW)) {
+					currentUser = s;
 					return true;
+				}
 			}
 		}
 		
-		Student s = studentDirectory.getStudentById(id);
-				
-		if (s.getPassword().equals(localHashPW)) {
-			currentUser = s;
-			return true;
-		}	
-			
 		return false;
 	}
 
