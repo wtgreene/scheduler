@@ -9,18 +9,18 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Tests CourseNameValidatorFSM.java
+ * Tests CourseNameValidator.java
  * 
  * @author Will Greene
  */
-public class CourseNameValidatorFSMTest {
+public class CourseNameValidatorTest {
 	
 	/**
-	 * Tests CourseNameValidatorFSM.isValid().
+	 * Tests CourseNameValidator.isValid().
 	 */
 	@Test
 	public void testIsValid() throws InvalidTransitionException {
-		CourseNameValidatorFSM c = new CourseNameValidatorFSM();
+		CourseNameValidator c = new CourseNameValidator();
 		
 		assertThrows(InvalidTransitionException.class, () -> c.isValid("!"));
 		assertThrows(InvalidTransitionException.class, () -> c.isValid("9"));
