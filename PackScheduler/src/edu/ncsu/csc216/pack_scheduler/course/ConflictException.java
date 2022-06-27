@@ -4,13 +4,13 @@
 package edu.ncsu.csc216.pack_scheduler.course;
 
 /**
- * Extends Exception class by providing a custom excecption type.
+ * Extends Exception class by providing a custom exception type.
  * 
  * @author Will Greene
  */
 public class ConflictException extends Exception {
 
-	/** ID used for serializatio. */
+	/** ID used for serialization. */
 	private static final long serialVersionUID = 1L;
 	
 	/**
