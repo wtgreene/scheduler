@@ -125,8 +125,9 @@ public class RegistrationManager {
 				localHashPW = hashPW(localPW);
 
 				if (registrar.getId().equals(localId)) {
+					String registrarPW = registrar.getPassword();
 
-					if (registrar.getPassword().equals(localHashPW)) {
+					if (registrarPW.equals(localHashPW)) {
 						currentUser = registrar;
 						return true;
 					}
@@ -149,7 +150,7 @@ public class RegistrationManager {
 	 */
 	public void logout() {
 		currentUser = registrar; 
-	}
+	} 
 	
 	/**
 	 * Returns the current user.
