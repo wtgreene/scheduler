@@ -129,6 +129,7 @@ public class RegistrationManager {
 
 					if (registrarPW.equals(localHashPW)) {
 						currentUser = registrar;
+						localId = "";
 						return true;
 					}
 				}
