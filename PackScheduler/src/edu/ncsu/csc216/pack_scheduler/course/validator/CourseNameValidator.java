@@ -34,6 +34,7 @@ public class CourseNameValidator {
 	 * 
 	 * @param courseName Course name
 	 * @return true if valid, false if not
+	 * @throws InvalidTransitionException if Course name is invalid
 	 */
 	public boolean isValid(String courseName) throws InvalidTransitionException {
 		validEndState = false;
