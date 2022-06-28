@@ -117,7 +117,7 @@ public class CourseNameValidator {
 		 */
 		@Override
 		void onDigit() throws InvalidTransitionException {
-			throw new InvalidTransitionException("Course name can only contain letters and digits.");
+			throw new InvalidTransitionException("Course name must start with a letter.");
 		}
 	}
 	
@@ -146,7 +146,7 @@ public class CourseNameValidator {
 			letterCount++;
 			
 			if (letterCount > MAX_PREFIX_LETTERS) {
-				throw new InvalidTransitionException("TODO - match with error message");
+				throw new InvalidTransitionException("Course name cannot start with more than 4 letters.");
 			}
 		}
 		
@@ -187,7 +187,7 @@ public class CourseNameValidator {
 			}
 			
 			else {
-				throw new InvalidTransitionException("TODO - match with error message");
+				throw new InvalidTransitionException("Course name must have 3 digits.");
 			}
 		}
 		
@@ -203,7 +203,7 @@ public class CourseNameValidator {
 			}
 			
 			if (digitCount > COURSE_NUMBER_LENGTH) {
-				throw new InvalidTransitionException("TODO - match with error message");
+				throw new InvalidTransitionException("Course name can only have 3 digits.");
 			}
 		}
 	}
@@ -227,7 +227,7 @@ public class CourseNameValidator {
 		 */
 		@Override
 		void onLetter() throws InvalidTransitionException {
-			throw new InvalidTransitionException("Course name can only contain letters and digits.");
+			throw new InvalidTransitionException("Course name can only have a 1 letter suffix.");
 		}
 		
 		/**
@@ -235,7 +235,7 @@ public class CourseNameValidator {
 		 */
 		@Override
 		void onDigit() throws InvalidTransitionException {
-			throw new InvalidTransitionException("Course name can only contain letters and digits.");
+			throw new InvalidTransitionException("Course name cannot contain digits after the suffix.");
 		}
 	}
 }
