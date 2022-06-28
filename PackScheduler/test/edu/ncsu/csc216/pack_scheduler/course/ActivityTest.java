@@ -16,14 +16,14 @@ class ActivityTest {
 	 */
 	@Test
 	void testCheckConflict() {
-		Activity a1 = new Course("CSC216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 1330, 1445);
-		Activity a2 = new Course("CSC216", "Software Development Fundamentals", "001", 3, "sesmith5", "TH", 1330, 1445);
+		Activity a1 = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 1330, 1445);
+		Activity a2 = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "TH", 1330, 1445);
 		
 		assertDoesNotThrow(() -> a1.checkConflict(a2));
 		assertDoesNotThrow(() -> a2.checkConflict(a1));
 		
-		Activity a3 = new Course("CSC216", "Software Development Fundamentals", "001", 3, "sesmith5", "M", 1330, 1445);
-		Activity a4 = new Course("CSC216", "Software Development Fundamentals", "001", 3, "sesmith5", "M", 1445, 1600);
+		Activity a3 = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "M", 1330, 1445);
+		Activity a4 = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "M", 1445, 1600);
 		
 		Exception e1 = assertThrows(ConflictException.class, () -> a3.checkConflict(a4));
 		assertEquals("Schedule conflict.", e1.getMessage());
@@ -37,7 +37,7 @@ class ActivityTest {
 	 */
 	@Test
 	public void testGetMeetingString() {
-		Activity a = new Course("CSC216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 30, 50);
+		Activity a = new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 30, 50);
 		
 		String s = a.getMeetingString();
 		assertEquals(s, "MW 12:30AM-12:50AM");
