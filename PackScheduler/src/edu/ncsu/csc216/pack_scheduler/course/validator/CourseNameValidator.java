@@ -55,6 +55,10 @@ public class CourseNameValidator {
 			i++;
 		}
 		
+		if (letterCount < 1 || letterCount > 4 || digitCount != 3) {
+			throw new InvalidTransitionException("TODO");
+		}
+		
 		return validEndState;
 	}
 	

@@ -5,6 +5,9 @@ package edu.ncsu.csc216.pack_scheduler.course;
 
 import java.util.Objects;
 
+import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
+import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
+
 /**
  * Assembles information for a Course.
  * 
@@ -37,6 +40,9 @@ public class Course extends Activity implements Comparable<Course> {
 	private int credits;
 	/** Course's instructor */
 	private String instructorId;
+	
+	/** Course name validator */
+	private CourseNameValidator validator = new CourseNameValidator();
 
 	/**
 	 * Constructs a Course object with values for all fields.
@@ -99,55 +105,61 @@ public class Course extends Activity implements Comparable<Course> {
 			throw new IllegalArgumentException("Invalid course name.");
 		}
 
-		// Throw exception if the name is an empty string
-		// Throw exception if the name contains less than 5 character or greater than 8
-		// characters
-		if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-			throw new IllegalArgumentException("Invalid course name.");
-		}
+//		// Throw exception if the name is an empty string
+//		// Throw exception if the name contains less than 5 character or greater than 8
+//		// characters
+//		if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
+//			throw new IllegalArgumentException("Invalid course name.");
+//		}
+//
+//		// Check for pattern of L[LLL] NNN
+//		int numLetters = 0;
+//		int numDigits = 0;
+//		boolean space = false;
+//
+//		for (int i = 0; i < name.length(); i++) {
+//			if (!space) {
+//				if (Character.isLetter(name.charAt(i))) {
+//					numLetters++;
+//				}
+//
+//				else if (name.charAt(i) == ' ') {
+//					space = true;
+//				}
+//
+//				else {
+//					throw new IllegalArgumentException("Invalid course name.");
+//				}
+//			}
+//
+//			else if (space) {
+//				if (Character.isDigit(name.charAt(i))) {
+//					numDigits++;
+//				}
+//
+//				else {
+//					throw new IllegalArgumentException("Invalid course name.");
+//				}
+//			}
+//		}
+//
+//		// Check that the number of letters is correct
+//		if (numLetters < MIN_LETTER_COUNT || numLetters > MAX_LETTER_COUNT) {
+//			throw new IllegalArgumentException("Invalid course name.");
+//		}
+//
+//		// Check that the number of digits is correct
+//		if (numDigits != DIGIT_COUNT) {
+//			throw new IllegalArgumentException("Invalid course name.");
+//		}
 
-		// Check for pattern of L[LLL] NNN
-		int numLetters = 0;
-		int numDigits = 0;
-		boolean space = false;
-
-		for (int i = 0; i < name.length(); i++) {
-			if (!space) {
-				if (Character.isLetter(name.charAt(i))) {
-					numLetters++;
-				}
-
-				else if (name.charAt(i) == ' ') {
-					space = true;
-				}
-
-				else {
-					throw new IllegalArgumentException("Invalid course name.");
-				}
+		try {
+			if (validator.isValid(name)) {
+				this.name = name;
 			}
-
-			else if (space) {
-				if (Character.isDigit(name.charAt(i))) {
-					numDigits++;
-				}
-
-				else {
-					throw new IllegalArgumentException("Invalid course name.");
-				}
-			}
-		}
-
-		// Check that the number of letters is correct
-		if (numLetters < MIN_LETTER_COUNT || numLetters > MAX_LETTER_COUNT) {
+		} catch (InvalidTransitionException e) {
 			throw new IllegalArgumentException("Invalid course name.");
 		}
-
-		// Check that the number of digits is correct
-		if (numDigits != DIGIT_COUNT) {
-			throw new IllegalArgumentException("Invalid course name.");
-		}
-
-		this.name = name;
 	}
 
 	/**
