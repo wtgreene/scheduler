@@ -35,34 +35,22 @@ public class CourseNameValidator {
 	 * @param courseName Course name
 	 * @return true if valid, false if not
 	 */
-	public boolean isValid(String courseName) {
+	public boolean isValid(String courseName) throws InvalidTransitionException {
+		validEndState = false;
 		currentState = stateInitial;
 		
 		int i = 0;
 		while (i < courseName.length()) {
+			
 			char ch = courseName.charAt(i);
 			
 			if (Character.isLetter(ch)) {
-				try {
-					currentState.onLetter();
-				} catch (InvalidTransitionException e) {
-					throw new IllegalArgumentException("Should I change this?");
-				}
+				currentState.onLetter();
+			} else if (Character.isDigit(ch)) {
+				currentState.onDigit();
+			} else {
+				currentState.onOther();
 			}
-			
-			else if (Character.isDigit(ch)) {
-				try {
-					currentState.onDigit();
-				} catch (InvalidTransitionException e) {
-					throw new IllegalArgumentException("Should I change this?");
-				}			}
-			
-			else {
-				try {
-					currentState.onOther();
-				} catch (InvalidTransitionException e) {
-					throw new IllegalArgumentException("Should I change this?");
-				}			}
 			
 			i++;
 		}
@@ -108,7 +96,7 @@ public class CourseNameValidator {
 		 * Constructs ...
 		 */
 		private InitialState() {
-			
+			super();
 		}
 		
 		/**
@@ -136,11 +124,14 @@ public class CourseNameValidator {
 	 */
 	public class LetterState extends State {
 		
+		/** maximum number of prefix letters */
+		private static final int MAX_PREFIX_LETTERS = 4;
+		
 		/**
 		 * Constructs ...
 		 */
 		private LetterState() {
-			
+			super();
 		}
 		
 		/**
@@ -150,7 +141,7 @@ public class CourseNameValidator {
 		void onLetter() throws InvalidTransitionException {
 			letterCount++;
 			
-			if (letterCount > 4) {
+			if (letterCount > MAX_PREFIX_LETTERS) {
 				throw new InvalidTransitionException("TODO - match with error message");
 			}
 		}
@@ -172,11 +163,14 @@ public class CourseNameValidator {
 	 */
 	public class NumberState extends State {
 		
+		/** number of characters in a Course number */
+		private static final int COURSE_NUMBER_LENGTH = 3;
+		
 		/**
 		 * Constructs ...
 		 */
 		private NumberState() {
-			
+			super();
 		}
 		
 		/**
@@ -184,7 +178,7 @@ public class CourseNameValidator {
 		 */
 		@Override
 		void onLetter () throws InvalidTransitionException {
-			if (digitCount == 3) {
+			if (digitCount == COURSE_NUMBER_LENGTH) {
 				currentState = stateSuffix;
 			}
 			
@@ -200,7 +194,11 @@ public class CourseNameValidator {
 		void onDigit() throws InvalidTransitionException {
 			digitCount++;
 			
-			if (digitCount > 3) {
+			if (digitCount == COURSE_NUMBER_LENGTH && letterCount >= 1) {
+				validEndState = true;
+			}
+			
+			if (digitCount > COURSE_NUMBER_LENGTH) {
 				throw new InvalidTransitionException("TODO - match with error message");
 			}
 		}
@@ -217,15 +215,15 @@ public class CourseNameValidator {
 		 * Constructs ...
 		 */
 		private SuffixState() {
-			
+			super();
 		}
 		
 		/**
 		 * Controls behavior for a letter character.
 		 */
 		@Override
-		void onLetter() {
-			validEndState = true;
+		void onLetter() throws InvalidTransitionException {
+			throw new InvalidTransitionException("Course name can only contain letters and digits.");
 		}
 		
 		/**
