@@ -5,8 +5,8 @@ package edu.ncsu.csc216.pack_scheduler.course;
 
 import java.util.Objects;
 
-//import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
-//import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
+import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
+import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
 
 /**
  * Assembles information for a Course.
@@ -15,16 +15,16 @@ import java.util.Objects;
  */
 public class Course extends Activity implements Comparable<Course> {
 
-	/** Minimum number of characters for a Course name */
-	private static final int MIN_NAME_LENGTH = 5;
-	/** Maximum number of characters for a Course name */
-	private static final int MAX_NAME_LENGTH = 8;
-	/** Minimum number of letters for a Course name */
-	private static final int MIN_LETTER_COUNT = 1;
-	/** Maximum number of letters for a Course name */
-	private static final int MAX_LETTER_COUNT = 4;
-	/** Number of digits for a Course name */
-	private static final int DIGIT_COUNT = 3;
+//	/** Minimum number of characters for a Course name */
+//	private static final int MIN_NAME_LENGTH = 5;
+//	/** Maximum number of characters for a Course name */
+//	private static final int MAX_NAME_LENGTH = 8;
+//	/** Minimum number of letters for a Course name */
+//	private static final int MIN_LETTER_COUNT = 1;
+//	/** Maximum number of letters for a Course name */
+//	private static final int MAX_LETTER_COUNT = 4;
+//	/** Number of digits for a Course name */
+//	private static final int DIGIT_COUNT = 3;
 	
 	/** Number of digits for a section */
 	private static final int SECTION_LENGTH = 3;
@@ -42,8 +42,8 @@ public class Course extends Activity implements Comparable<Course> {
 	/** Course's instructor */
 	private String instructorId;
 	
-//	/** Course name validator */
-//	private CourseNameValidator validator = new CourseNameValidator();
+	/** Course name validator */
+	private CourseNameValidator validator = new CourseNameValidator();
 
 	/**
 	 * Constructs a Course object with values for all fields.
@@ -106,61 +106,61 @@ public class Course extends Activity implements Comparable<Course> {
 			throw new IllegalArgumentException("Invalid course name.");
 		}
 
-		// Throw exception if the name is an empty string
-		// Throw exception if the name contains less than 5 character or greater than 8
-		// characters
-		if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-			throw new IllegalArgumentException("Invalid course name.");
-		}
-
-		// Check for pattern of L[LLL] NNN
-		int numLetters = 0;
-		int numDigits = 0;
-		boolean space = false;
-
-		for (int i = 0; i < name.length(); i++) {
-			if (!space) {
-				if (Character.isLetter(name.charAt(i))) {
-					numLetters++;
-				}
-
-				else if (name.charAt(i) == ' ') {
-					space = true;
-				}
-
-				else {
-					throw new IllegalArgumentException("Invalid course name.");
-				}
-			}
-
-			else if (space) {
-				if (Character.isDigit(name.charAt(i))) {
-					numDigits++;
-				}
-
-				else {
-					throw new IllegalArgumentException("Invalid course name.");
-				}
-			}
-		}
-
-		// Check that the number of letters is correct
-		if (numLetters < MIN_LETTER_COUNT || numLetters > MAX_LETTER_COUNT) {
-			throw new IllegalArgumentException("Invalid course name.");
-		}
-
-		// Check that the number of digits is correct
-		if (numDigits != DIGIT_COUNT) {
-			throw new IllegalArgumentException("Invalid course name.");
-		}
-
-//		try {
-//			if (validator.isValid(name)) {
-				this.name = name;
-//			}
-//		} catch (InvalidTransitionException e) {
+//		// Throw exception if the name is an empty string
+//		// Throw exception if the name contains less than 5 character or greater than 8
+//		// characters
+//		if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
 //			throw new IllegalArgumentException("Invalid course name.");
 //		}
+//
+//		// Check for pattern of L[LLL] NNN
+//		int numLetters = 0;
+//		int numDigits = 0;
+//		boolean space = false;
+//
+//		for (int i = 0; i < name.length(); i++) {
+//			if (!space) {
+//				if (Character.isLetter(name.charAt(i))) {
+//					numLetters++;
+//				}
+//
+//				else if (name.charAt(i) == ' ') {
+//					space = true;
+//				}
+//
+//				else {
+//					throw new IllegalArgumentException("Invalid course name.");
+//				}
+//			}
+//
+//			else if (space) {
+//				if (Character.isDigit(name.charAt(i))) {
+//					numDigits++;
+//				}
+//
+//				else {
+//					throw new IllegalArgumentException("Invalid course name.");
+//				}
+//			}
+//		}
+//
+//		// Check that the number of letters is correct
+//		if (numLetters < MIN_LETTER_COUNT || numLetters > MAX_LETTER_COUNT) {
+//			throw new IllegalArgumentException("Invalid course name.");
+//		}
+//
+//		// Check that the number of digits is correct
+//		if (numDigits != DIGIT_COUNT) {
+//			throw new IllegalArgumentException("Invalid course name.");
+//		}
+
+		try {
+			if (validator.isValid(name)) {
+				this.name = name;
+			}
+		} catch (InvalidTransitionException e) {
+			throw new IllegalArgumentException("Invalid course name.");
+		}
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 
 	/**
-	 * Compares ...
+	 * Compares the alphabetic order of 2 Courses.
 	 */
 	@Override
 	public int compareTo(Course c) {		
@@ -309,7 +309,7 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 	
 	/**
-	 * Compares ...
+	 * Compares the alphabetic order of 2 Activities.
 	 */
 	@Override
 	public int compareTo(Activity a) {

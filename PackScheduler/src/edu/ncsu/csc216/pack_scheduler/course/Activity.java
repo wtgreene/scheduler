@@ -156,7 +156,6 @@ public abstract class Activity implements Conflict {
 	 * 
 	 * @param activity activity
 	 * @return true if duplicate, false if not
-	 * 
 	 */
 	public abstract boolean isDuplicate(Activity activity);
 
@@ -311,9 +310,10 @@ public abstract class Activity implements Conflict {
 	}
 
 	/**
-	 * Compares ...
-	 * @param a Activity
-	 * @return compares
+	 * Compares 2 Activities for alphabetic order.
+	 * 
+	 * @param a Activity to compare to
+	 * @return a negative or positive number, based on the alphabetic order of the Activities
 	 */
 	public abstract int compareTo(Activity a);
 }
