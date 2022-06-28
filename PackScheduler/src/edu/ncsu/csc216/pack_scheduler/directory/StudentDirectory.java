@@ -178,6 +178,7 @@ public class StudentDirectory {
 	 * 
 	 * @param id Student's unity id
 	 * @return a specified student
+	 * @throws IllegalArgumentException if not found in the directory
 	 */
 	public Student getStudentById(String id) {
 		for (int i = 0; i < studentDirectory.size(); i++) {

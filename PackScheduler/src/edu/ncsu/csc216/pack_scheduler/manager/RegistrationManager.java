@@ -136,7 +136,7 @@ public class RegistrationManager {
 
 				Student s = studentDirectory.getStudentById(id);
 
-				if (s.getPassword().equals(localHashPW)) {
+				if (s.getPassword().equals(localHashPW) && currentUser.getId().equals(registrar.getId())) {
 					currentUser = s;
 					return true;
 				}
