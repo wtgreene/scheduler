@@ -15,16 +15,6 @@ import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionExceptio
  */
 public class Course extends Activity implements Comparable<Course> {
 
-	/** Minimum number of characters for a Course name */
-	private static final int MIN_NAME_LENGTH = 5;
-	/** Maximum number of characters for a Course name */
-	private static final int MAX_NAME_LENGTH = 8;
-	/** Minimum number of letters for a Course name */
-	private static final int MIN_LETTER_COUNT = 1;
-	/** Maximum number of letters for a Course name */
-	private static final int MAX_LETTER_COUNT = 4;
-	/** Number of digits for a Course name */
-	private static final int DIGIT_COUNT = 3;
 	/** Number of digits for a section */
 	private static final int SECTION_LENGTH = 3;
 	/** Minimum number of credits for a Course */
