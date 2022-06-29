@@ -21,7 +21,7 @@ public class CourseCatalogTest {
 	private final String validTestFile = "test-files/course_records.txt";
 	
 	/** Course name */
-	private static final String NAME = "CSC216";
+	private static final String NAME = "CSC 216";
 	/** Course title */
 	private static final String TITLE = "Software Development Fundamentals";
 	/** Course section */
@@ -38,7 +38,7 @@ public class CourseCatalogTest {
 	private static final int END_TIME = 1445;
 	
 	/** Course name */
-	private static final String NAME_2 = "CSC116";
+	private static final String NAME_2 = "CSC 116";
 	/** Course title */
 	private static final String TITLE_2 = "Intro to Programming - Java";
 	/** Course section */
@@ -86,8 +86,8 @@ public class CourseCatalogTest {
 		CourseCatalog c = new CourseCatalog();
 
 		c.loadCoursesFromFile(validTestFile);
-		Course course = c.getCourseFromCatalog("CSC316", "001");
-		assertEquals(course.getName(), "CSC316");
+		Course course = c.getCourseFromCatalog("CSC 316", "001");
+		assertEquals(course.getName(), "CSC 316");
 	}
 	
 	/**
