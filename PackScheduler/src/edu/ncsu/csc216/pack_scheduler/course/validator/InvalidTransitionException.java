@@ -22,10 +22,10 @@ public class InvalidTransitionException extends Exception {
 		super(message);
 	}
 	
-	/**
-	 * Constructs an InvalidTransitionException with a default message.
-	 */
-	public InvalidTransitionException() {
-		this("Invalid FSM Transition.");
-	}
+//	/**
+//	 * Constructs an InvalidTransitionException with a default message.
+//	 */
+//	public InvalidTransitionException() {
+//		this("Invalid FSM Transition.");
+//	}
 }
