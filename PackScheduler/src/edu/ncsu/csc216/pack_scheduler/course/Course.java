@@ -5,8 +5,8 @@ package edu.ncsu.csc216.pack_scheduler.course;
 
 import java.util.Objects;
 
-import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
-import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
+//import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
+//import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
 
 /**
  * Assembles information for a Course.
