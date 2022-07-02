@@ -2,6 +2,8 @@ package edu.ncsu.csc216.pack_scheduler.user;
 
 import java.util.Objects;
 
+import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
+
 /**
  * Assembles information for a Student
  * 
@@ -16,6 +18,9 @@ public class Student extends User implements Comparable<Student> {
 
 	/** student's max credits */
 	private int maxCredits;
+	
+	/** schedule */
+	private Schedule schedule;
 
 	/**
 	 * Constructs a Student object with values for all fields.
@@ -30,6 +35,7 @@ public class Student extends User implements Comparable<Student> {
 	public Student(String firstName, String lastName, String id, String email, String password, int maxCredits) {
 		super(firstName, lastName, id, email, password);
 		setMaxCredits(maxCredits);
+		schedule = new Schedule();
 	}
 
 	/**
@@ -70,6 +76,47 @@ public class Student extends User implements Comparable<Student> {
 		}
 
 		this.maxCredits = maxCredits;
+	}
+
+	/**
+	/**
+	 * Generates a hashCode for Student using all fields.
+	 * 
+	 * @return hashCode	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(maxCredits);
+		return result;
+	}
+
+	/**
+	 * Compares a given object to this object for equality on all fields.
+	 * 
+	 * @param obj object to compare to
+	 * @return true if equal, false if not
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return maxCredits == other.maxCredits;
+	}
+
+	/**
+	 * Returns a comma-separated value String of all Student fields.
+	 * 
+	 * @return String representation of Student
+	 */
+	@Override
+	public String toString() {
+		return getFirstName() + "," + getLastName() + "," + getId() + "," + getEmail() + "," + getPassword() + "," + maxCredits;
 	}
 
 	/**
@@ -139,45 +186,12 @@ public class Student extends User implements Comparable<Student> {
 	
 		return 0;
 	}
-
+	
 	/**
-	 * Returns a comma-separated value String of all Student fields.
-	 * 
-	 * @return String representation of Student
+	 * Returns Student Schedule.
+	 * @return Student Schedule
 	 */
-	@Override
-	public String toString() {
-		return getFirstName() + "," + getLastName() + "," + getId() + "," + getEmail() + "," + getPassword() + "," + maxCredits;
-	}
-
-	/**
-	/**
-	 * Generates a hashCode for Student using all fields.
-	 * 
-	 * @return hashCode	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(maxCredits);
-		return result;
-	}
-
-	/**
-	 * Compares a given object to this object for equality on all fields.
-	 * 
-	 * @param obj object to compare to
-	 * @return true if equal, false if not
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Student other = (Student) obj;
-		return maxCredits == other.maxCredits;
+	public Schedule getSchedule() {
+		return schedule;
 	}
 }

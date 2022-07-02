@@ -109,7 +109,7 @@ public class Schedule {
 		
 		// parameter error checking - null
 		if (title == null) {
-			throw new IllegalArgumentException("Title cannot be null");
+			throw new IllegalArgumentException("Title cannot be null.");
 		}
 		
 		this.title = title;

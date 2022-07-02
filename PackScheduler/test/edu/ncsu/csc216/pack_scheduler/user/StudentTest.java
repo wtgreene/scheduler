@@ -398,4 +398,13 @@ class StudentTest {
 		assertNotEquals(s1.hashCode(), s7.hashCode());
 		assertNotEquals(s1.hashCode(), s8.hashCode());
 	}
+	
+	/**
+	 * Tests Student.getSchedule().
+	 */
+	@Test
+	void testGetSchedule() {
+		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, MAX_CREDITS);
+		assertDoesNotThrow(() -> s1.getSchedule());
+	}
 }
