@@ -39,7 +39,7 @@ public class Schedule {
 		// parameter error checking - duplicate
 		for (int i = 0; i < schedule.size(); i++) {
 			if (schedule.get(i).isDuplicate(c)) {
-				throw new IllegalArgumentException("You are already enrolled in " + c.getName() + ".");
+				throw new IllegalArgumentException("You are already enrolled in " + c.getName());
 			}
 		}
 		

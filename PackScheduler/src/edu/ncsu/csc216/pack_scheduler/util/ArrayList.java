@@ -128,7 +128,7 @@ public class ArrayList<E> extends AbstractList<E> {
 			
 			tempE = list[index];
 			
-			for (int i = index; i < size - 1; i++) {
+			for (int i = index; i < size; i++) {
 				list[index] = list[index + 1];
 			}
 			
