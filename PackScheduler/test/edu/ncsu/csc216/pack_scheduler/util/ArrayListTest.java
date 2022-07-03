@@ -132,6 +132,17 @@ public class ArrayListTest {
 		assertEquals("c", list.get(0));
 		
 		assertThrows(IndexOutOfBoundsException.class, () -> list.get(1)); // size double-check
+		
+		ArrayList<String> fruit = new ArrayList<String>();
+		
+		fruit.add(0, "orange");
+		fruit.add(1, "banana");
+		fruit.add(2, "apple");
+		fruit.add(3, "kiwi");
+		
+		fruit.remove(1);
+		
+		assertEquals("kiwi", fruit.get(2));
 	}
 	
 	/**
