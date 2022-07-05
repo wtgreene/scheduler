@@ -100,8 +100,6 @@ public class RegistrationManagerTest {
 		assertTrue(manager.login(ID, PASSWORD));
 		assertFalse(manager.login(ID_2, PASSWORD_2));
 		// new - end
-		
-		assertThrows(IllegalArgumentException.class, () -> manager.login("notalogin", "badpassword"));
 	}
 
 	/**
