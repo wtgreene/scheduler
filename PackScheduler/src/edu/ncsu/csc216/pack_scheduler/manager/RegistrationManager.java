@@ -124,7 +124,7 @@ public class RegistrationManager {
 				String localPW = password;
 				localHashPW = hashPW(localPW);
 
-				if (registrar.getId().equals(localId)) {
+				if (registrar.getId().equals(localId) && currentUser == null) {
 					String registrarPW = registrar.getPassword();
 
 					if (registrarPW.equals(localHashPW)) {
