@@ -24,6 +24,32 @@ public class RegistrationManagerTest {
 	/** registrar properties file */
 	private static final String PROP_FILE = "registrar.properties";
 	
+	/** student's first name */
+	private static final String FIRST_NAME = "firstName";
+	/** student's last name */
+	private static final String LAST_NAME = "lastName";
+	/** student's unity id */
+	private static final String ID = "id";
+	/** student's email */
+	private static final String EMAIL = "email@ncsu.edu";
+	/** student's password */
+	private static final String PASSWORD = "password";
+	/** student's max credits */
+	private static final int MAX_CREDITS = 15;
+	
+	/** 2nd student's first name */
+	private static final String FIRST_NAME_2 = "firstName2";
+	/** 2nd student's last name */
+	private static final String LAST_NAME_2 = "lastName2";
+	/** 2nd student's unity id */
+	private static final String ID_2 = "id2";
+	/** 2nd student's email */
+	private static final String EMAIL_2 = "email2@ncsu.edu";
+	/** 2nd student's password */
+	private static final String PASSWORD_2 = "password2";
+	/** 2nd student's max credits */
+	private static final int MAX_CREDITS_2 = 16;
+	
 	/**
 	 * Sets up the RegistrationManager and clears the data.
 	 * @throws Exception if error
@@ -67,6 +93,13 @@ public class RegistrationManagerTest {
 		}
 		
 		assertTrue(manager.login(prop.getProperty("id"), prop.getProperty("pw")));
+		
+		// new - beg
+		manager.getStudentDirectory().addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
+		manager.getStudentDirectory().addStudent(FIRST_NAME_2, LAST_NAME_2, ID_2, EMAIL_2, PASSWORD_2, PASSWORD_2, MAX_CREDITS_2);
+		assertTrue(manager.login(ID, PASSWORD));
+		assertFalse(manager.login(ID_2, PASSWORD_2));
+		// new - end
 		
 		assertThrows(IllegalArgumentException.class, () -> manager.login("notalogin", "badpassword"));
 	}
