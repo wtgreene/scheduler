@@ -1,6 +1,6 @@
 package edu.ncsu.csc216.pack_scheduler.course;
 
-import java.util.Objects;
+import java.util.Objects; 
 
 /**
  * Assembles information for an Activity.

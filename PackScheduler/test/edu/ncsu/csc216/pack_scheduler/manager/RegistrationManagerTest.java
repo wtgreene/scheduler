@@ -1,6 +1,5 @@
 package edu.ncsu.csc216.pack_scheduler.manager;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileInputStream;
