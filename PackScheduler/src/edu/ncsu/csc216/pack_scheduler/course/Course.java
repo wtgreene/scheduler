@@ -316,7 +316,7 @@ public class Course extends Activity implements Comparable<Course> {
 		s[1] = section;
 		s[2] = getTitle();
 		s[3] = getMeetingString();
-		s[4] = Integer.toString(roll.getEnrollmentCap());
+		s[4] = Integer.toString(roll.getOpenSeats());
 
 		return s;
 	}

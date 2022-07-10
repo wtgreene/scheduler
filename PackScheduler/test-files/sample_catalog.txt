@@ -1,2 +1,2 @@
-CSC116,Intro to Programming - Java,001,3,jdyoung2,MW,910,1100
-CSC216,Software Development Fundamentals,001,3,sesmith5,TH,1330,1445
+CSC116,Intro to Programming - Java,001,3,jdyoung2,10,MW,910,1100
+CSC216,Software Development Fundamentals,001,3,sesmith5,10,TH,1330,1445
