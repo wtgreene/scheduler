@@ -5,6 +5,7 @@ package edu.ncsu.csc216.pack_scheduler.course;
 
 import java.util.Objects;
 
+import edu.ncsu.csc216.pack_scheduler.course.roll.CourseRoll;
 import edu.ncsu.csc216.pack_scheduler.course.validator.CourseNameValidator;
 import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionException;
 
@@ -15,17 +16,6 @@ import edu.ncsu.csc216.pack_scheduler.course.validator.InvalidTransitionExceptio
  */
 public class Course extends Activity implements Comparable<Course> {
 
-//	/** Minimum number of characters for a Course name */
-//	private static final int MIN_NAME_LENGTH = 5;
-//	/** Maximum number of characters for a Course name */
-//	private static final int MAX_NAME_LENGTH = 8;
-//	/** Minimum number of letters for a Course name */
-//	private static final int MIN_LETTER_COUNT = 1;
-//	/** Maximum number of letters for a Course name */
-//	private static final int MAX_LETTER_COUNT = 4;
-//	/** Number of digits for a Course name */
-//	private static final int DIGIT_COUNT = 3;
-	
 	/** Number of digits for a section */
 	private static final int SECTION_LENGTH = 3;
 	/** Minimum number of credits for a Course */
@@ -41,44 +31,52 @@ public class Course extends Activity implements Comparable<Course> {
 	private int credits;
 	/** Course's instructor */
 	private String instructorId;
-	
+
 	/** Course name validator */
 	private CourseNameValidator validator = new CourseNameValidator();
+
+	/** Course's roll */
+	private CourseRoll roll;
 
 	/**
 	 * Constructs a Course object with values for all fields.
 	 * 
-	 * @param name         name of Course
-	 * @param title        title of Course
-	 * @param section      section of Course
-	 * @param credits      credit hours for Course
-	 * @param instructorId instructor's unity id
-	 * @param meetingDays  meeting days for Course as series of chars
-	 * @param startTime    start time for Course
-	 * @param endTime      end time for Course
+	 * @param name          name of Course
+	 * @param title         title of Course
+	 * @param section       section of Course
+	 * @param credits       credit hours for Course
+	 * @param instructorId  instructor's unity id
+	 * @param enrollmentCap enrollment cap for the Course
+	 * @param meetingDays   meeting days for Course as series of chars
+	 * @param startTime     start time for Course
+	 * @param endTime       end time for Course
 	 */
-	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays,
-			int startTime, int endTime) {
+	public Course(String name, String title, String section, int credits, String instructorId, int enrollmentCap,
+			String meetingDays, int startTime, int endTime) {
 		super(title, meetingDays, startTime, endTime);
 		setName(name);
 		setSection(section);
 		setCredits(credits);
 		setInstructorId(instructorId);
+
+		roll = new CourseRoll(enrollmentCap);
 	}
 
 	/**
 	 * Creates a Course with the given name, title, section, credits, instructorId,
 	 * and meetingDays for courses that are arranged.
 	 * 
-	 * @param name         name of Course
-	 * @param title        title of Course
-	 * @param section      section of Course
-	 * @param credits      credit hours for Course
-	 * @param instructorId instructor's unity id
-	 * @param meetingDays  meeting days for Course as series of chars
+	 * @param name          name of Course
+	 * @param title         title of Course
+	 * @param section       section of Course
+	 * @param credits       credit hours for Course
+	 * @param instructorId  instructor's unity id
+	 * @param enrollmentCap enrollment cap for the Course
+	 * @param meetingDays   meeting days for Course as series of chars
 	 */
-	public Course(String name, String title, String section, int credits, String instructorId, String meetingDays) {
-		this(name, title, section, credits, instructorId, meetingDays, 0, 0);
+	public Course(String name, String title, String section, int credits, String instructorId, int enrollmentCap,
+			String meetingDays) {
+		this(name, title, section, credits, instructorId, enrollmentCap, meetingDays, 0, 0);
 	}
 
 	/**
@@ -105,54 +103,6 @@ public class Course extends Activity implements Comparable<Course> {
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid course name.");
 		}
-
-//		// Throw exception if the name is an empty string
-//		// Throw exception if the name contains less than 5 character or greater than 8
-//		// characters
-//		if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-//			throw new IllegalArgumentException("Invalid course name.");
-//		}
-//
-//		// Check for pattern of L[LLL] NNN
-//		int numLetters = 0;
-//		int numDigits = 0;
-//		boolean space = false;
-//
-//		for (int i = 0; i < name.length(); i++) {
-//			if (!space) {
-//				if (Character.isLetter(name.charAt(i))) {
-//					numLetters++;
-//				}
-//
-//				else if (name.charAt(i) == ' ') {
-//					space = true;
-//				}
-//
-//				else {
-//					throw new IllegalArgumentException("Invalid course name.");
-//				}
-//			}
-//
-//			else if (space) {
-//				if (Character.isDigit(name.charAt(i))) {
-//					numDigits++;
-//				}
-//
-//				else {
-//					throw new IllegalArgumentException("Invalid course name.");
-//				}
-//			}
-//		}
-//
-//		// Check that the number of letters is correct
-//		if (numLetters < MIN_LETTER_COUNT || numLetters > MAX_LETTER_COUNT) {
-//			throw new IllegalArgumentException("Invalid course name.");
-//		}
-//
-//		// Check that the number of digits is correct
-//		if (numDigits != DIGIT_COUNT) {
-//			throw new IllegalArgumentException("Invalid course name.");
-//		}
 
 		try {
 			if (validator.isValid(name)) {
@@ -244,85 +194,6 @@ public class Course extends Activity implements Comparable<Course> {
 
 		this.instructorId = instructorId;
 	}
-	
-	/**
-	 * Populates the rows of the course catalog and student schedule.
-	 * 
-	 * @return course catalog and student schedule
-	 */
-	@Override
-	public String[] getShortDisplayArray() {
-		String[] s = new String[4];
-		s[0] = name;
-		s[1] = section;
-		s[2] = getTitle();
-		s[3] = getMeetingString();
-		return s;
-	}
-
-	/**
-	 * Displays the final schedule.
-	 * 
-	 * @return final schedule
-	 */
-	@Override
-	public String[] getLongDisplayArray() {
-		String[] s = new String[7];
-		s[0] = name;
-		s[1] = section;
-		s[2] = getTitle();
-		s[3] = Integer.toString(credits);
-		s[4] = instructorId;
-		s[5] = getMeetingString();
-		s[6] = "";
-		return s;
-	}
-
-	/**
-	 * Returns when an activity is a duplicate of the current Course.
-	 * 
-	 * @param activity Activity object to compare to
-	 * @return true if duplicate, false if not
-	 */
-	@Override
-	public boolean isDuplicate(Activity activity) {
-		if (activity instanceof Course) {
-			Course c = (Course) activity;
-			return name.equals(c.getName());
-		}
-	
-		return false;
-	}
-
-	/**
-	 * Compares the alphabetic order of 2 Courses.
-	 */
-	@Override
-	public int compareTo(Course c) {		
-		if (name.compareTo(c.name) != 0) {
-			return name.compareTo(c.name);
-		}
-		
-		else {
-			return section.compareTo(c.section);
-		}
-	}
-	
-	/**
-	 * Compares the alphabetic order of 2 Activities.
-	 */
-	@Override
-	public int compareTo(Activity a) {
-		Course c = (Course)a;
-		
-		if (name.compareTo(c.name) != 0) {
-			return name.compareTo(c.name);
-		}
-		
-		else {
-			return section.compareTo(c.section);
-		}
-	}
 
 	/**
 	 * Sets the meeting days and time.
@@ -388,6 +259,17 @@ public class Course extends Activity implements Comparable<Course> {
 	}
 
 	/**
+	 * Generates a hashCode for Course using all fields.
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(credits, instructorId, name, section);
+		return result;
+	}
+
+	/**
 	 * Compares a given object to this object for equality on all fields.
 	 */
 	@Override
@@ -413,21 +295,105 @@ public class Course extends Activity implements Comparable<Course> {
 
 		if (getMeetingDays().equals("A")) {
 			return name + "," + getTitle() + "," + section + "," + credits + "," + instructorId + ","
-					+ getMeetingDays();
+					+ Integer.toString(roll.getEnrollmentCap()) + "," + getMeetingDays();
 		}
 
-		return name + "," + getTitle() + "," + section + "," + credits + "," + instructorId + "," + getMeetingDays()
+		return name + "," + getTitle() + "," + section + "," + credits + "," + instructorId + "," + Integer.toString(roll.getEnrollmentCap()) + "," + getMeetingDays()
 				+ "," + getStartTime() + "," + getEndTime();
 	}
 
 	/**
-	 * Generates a hashCode for Course using all fields.
+	 * Populates the rows of the course catalog and student schedule.
+	 * 
+	 * @return course catalog and student schedule
 	 */
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(credits, instructorId, name, section);
-		return result;
+	public String[] getShortDisplayArray() {
+
+		String[] s = new String[5];
+
+		s[0] = name;
+		s[1] = section;
+		s[2] = getTitle();
+		s[3] = getMeetingString();
+		s[4] = Integer.toString(roll.getEnrollmentCap());
+
+		return s;
+	}
+
+	/**
+	 * Displays the final schedule.
+	 * 
+	 * @return final schedule
+	 */
+	@Override
+	public String[] getLongDisplayArray() {
+
+		String[] s = new String[7];
+
+		s[0] = name;
+		s[1] = section;
+		s[2] = getTitle();
+		s[3] = Integer.toString(credits);
+		s[4] = instructorId;
+		s[5] = getMeetingString();
+		s[6] = "";
+
+		return s;
+	}
+
+	/**
+	 * Returns when an activity is a duplicate of the current Course.
+	 * 
+	 * @param activity Activity object to compare to
+	 * @return true if duplicate, false if not
+	 */
+	@Override
+	public boolean isDuplicate(Activity activity) {
+		if (activity instanceof Course) {
+			Course c = (Course) activity;
+			return name.equals(c.getName());
+		}
+
+		return false;
+	}
+
+	/**
+	 * Compares the alphabetic order of 2 Courses.
+	 */
+	@Override
+	public int compareTo(Course c) {
+		if (name.compareTo(c.name) != 0) {
+			return name.compareTo(c.name);
+		}
+
+		else {
+			return section.compareTo(c.section);
+		}
+	}
+
+	/**
+	 * Compares the alphabetic order of 2 Activities.
+	 */
+	@Override
+	public int compareTo(Activity a) {
+		Course c = (Course) a;
+
+		if (name.compareTo(c.name) != 0) {
+			return name.compareTo(c.name);
+		}
+
+		else {
+			return section.compareTo(c.section);
+		}
+	}
+
+	/**
+	 * Returns Course Roll.
+	 * 
+	 * @return course roll
+	 */
+	public CourseRoll getCourseRoll() {
+		return roll;
 	}
 }

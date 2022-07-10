@@ -89,6 +89,7 @@ public class CourseRecordIO {
 			String section = lineScanner.next();
 			int credits = lineScanner.nextInt();
 			String instructorId = lineScanner.next();
+			int enrollmentCap = lineScanner.nextInt();
 			String meetingDays = lineScanner.next();
 
 			if ("A".equals(meetingDays)) {
@@ -98,7 +99,7 @@ public class CourseRecordIO {
 				}
 
 				lineScanner.close();
-				c = new Course(name, title, section, credits, instructorId, meetingDays);
+				c = new Course(name, title, section, credits, instructorId, enrollmentCap, meetingDays);
 				return c;
 			}
 
@@ -112,7 +113,7 @@ public class CourseRecordIO {
 				}
 
 				lineScanner.close();
-				c = new Course(name, title, section, credits, instructorId, meetingDays, startTime, endTime);
+				c = new Course(name, title, section, credits, instructorId, enrollmentCap, meetingDays, startTime, endTime);
 				return c;
 			}
 

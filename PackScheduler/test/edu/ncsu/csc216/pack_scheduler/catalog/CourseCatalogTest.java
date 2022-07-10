@@ -54,6 +54,9 @@ public class CourseCatalogTest {
 	/** Course end time */
 	private static final int END_TIME_2 = 1100;
 	
+	/** Course enrollment cap */
+	private static final int ENROLLMENT_CAP = 10;
+	
 	/**
 	 * Tests CourseCatalog constructor.
 	 */
@@ -69,8 +72,8 @@ public class CourseCatalogTest {
 	public void testNewCourseCatalog() {
 		CourseCatalog c = new CourseCatalog();
 		
-		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 
 		c.newCourseCatalog();
 		
@@ -97,9 +100,9 @@ public class CourseCatalogTest {
 	public void testAddCourseToCatalog() {
 		CourseCatalog c = new CourseCatalog();
 		
-		Course course = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		Course course = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 		
-		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 		
 		assertEquals(c.getCourseFromCatalog(NAME, SECTION), course);
 	}
@@ -111,8 +114,8 @@ public class CourseCatalogTest {
 	public void testRemoveCourseFromCatalog() {
 		CourseCatalog c = new CourseCatalog();
 		
-		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
 		c.removeCourseFromCatalog(NAME, SECTION);
 		
@@ -126,11 +129,11 @@ public class CourseCatalogTest {
 	public void testGetCourseCatalog() {
 		CourseCatalog c = new CourseCatalog();
 		
-		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
-		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
 		String[][] catalog = c.getCourseCatalog();
 		
@@ -151,8 +154,8 @@ public class CourseCatalogTest {
 	public void testSaveCourseCatalog() {
 		CourseCatalog c = new CourseCatalog();
 		
-		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		c.addCourseToCatalog(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		c.addCourseToCatalog(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 		
 		assertDoesNotThrow(() -> c.saveCourseCatalog("test-files/sample_catalog.txt"));
 	}

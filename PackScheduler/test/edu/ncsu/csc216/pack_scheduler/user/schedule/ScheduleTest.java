@@ -52,7 +52,8 @@ public class ScheduleTest {
 	/** Course end time */
 	private static final int END_TIME_2 = 1100;
 	
-	// use CourseCatalog to load and find Courses
+	/** Course enrollment cap */
+	private static final int ENROLLMENT_CAP = 10;
 	
 	/**
 	 * Tests Schedule constructor.
@@ -74,7 +75,7 @@ public class ScheduleTest {
 	@Test
 	public void testAddCourseToSchedule() {
 		Schedule s = new Schedule();
-		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 
 		assertTrue(s.addCourseToSchedule(c));
 		
@@ -92,7 +93,7 @@ public class ScheduleTest {
 	@Test
 	public void testRemoveCourseFromSchedule() {
 		Schedule s = new Schedule();
-		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 
 		s.addCourseToSchedule(c);
 		assertTrue(s.removeCourseFromSchedule(c));
@@ -104,7 +105,7 @@ public class ScheduleTest {
 	@Test
 	public void testResetSchedule() {
 		Schedule s = new Schedule();
-		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 
 		s.setTitle("Your Schedule");
 		s.addCourseToSchedule(c);
@@ -122,8 +123,8 @@ public class ScheduleTest {
 	@Test
 	public void testGetScheduledCourses() {
 		Schedule s = new Schedule();
-		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
-		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
 
 		s.addCourseToSchedule(c1);
 		s.addCourseToSchedule(c2);

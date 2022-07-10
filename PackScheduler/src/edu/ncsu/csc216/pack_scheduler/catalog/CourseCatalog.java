@@ -55,20 +55,22 @@ public class CourseCatalog {
 	 * Adds a Course to the catalog. If the Course is already in the catalog,
 	 * nothing is added.
 	 * 
-	 * @param name         Course name
-	 * @param title        Course title
-	 * @param section      Course section
-	 * @param credits      Course's number of credit hours
-	 * @param instructorId Course's instructor id
-	 * @param meetingDays  meeting days for Course as series of char
-	 * @param startTime    Course start time
-	 * @param endTime      Course end time
+	 * @param name          Course name
+	 * @param title         Course title
+	 * @param section       Course section
+	 * @param credits       Course's number of credit hours
+	 * @param instructorId  Course's instructor id
+	 * @param enrollmentCap Course's enrollment cap
+	 * @param meetingDays   meeting days for Course as series of char
+	 * @param startTime     Course start time
+	 * @param endTime       Course end time
 	 * @return true if Course is added, false if already in catalog
 	 * @throws IllegalArgumentException if Course object cannot be constructed
 	 */
 	public boolean addCourseToCatalog(String name, String title, String section, int credits, String instructorId,
-			String meetingDays, int startTime, int endTime) {
-		Course c = new Course(name, title, section, credits, instructorId, meetingDays, startTime, endTime);
+			int enrollmentCap, String meetingDays, int startTime, int endTime) {
+		Course c = new Course(name, title, section, credits, instructorId, enrollmentCap, meetingDays, startTime,
+				endTime);
 
 		for (int i = 0; i < catalog.size(); i++) {
 			if (name.equals(catalog.get(i).getName()) && section.equals(catalog.get(i).getSection())) {
@@ -100,7 +102,8 @@ public class CourseCatalog {
 	}
 
 	/**
-	 * Returns a Course from the catalog. If the Course does not exist, null is returned.
+	 * Returns a Course from the catalog. If the Course does not exist, null is
+	 * returned.
 	 * 
 	 * @param name    Course name
 	 * @param section Course section
