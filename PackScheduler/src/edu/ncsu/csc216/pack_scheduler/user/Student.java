@@ -2,6 +2,7 @@ package edu.ncsu.csc216.pack_scheduler.user;
 
 import java.util.Objects;
 
+import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
 
 /**
@@ -193,5 +194,39 @@ public class Student extends User implements Comparable<Student> {
 	 */
 	public Schedule getSchedule() {
 		return schedule;
+	}
+	
+	/**
+	 * Returns whether a Course can be added to a Student's Schedule.
+	 * 
+	 * @param c Course to be added
+	 * @return true if able, false if not
+	 */
+	public boolean canAdd(Course c) {
+		
+//		if (c == null) {
+//			return false;
+//		}
+//		
+//		try {
+//			schedule.addCourseToSchedule(c);
+//		} catch (IllegalArgumentException e) {
+//			return false;
+//		}
+//		
+//		if (schedule.getScheduleCredits() > maxCredits) {
+//			schedule.removeCourseFromSchedule(c);
+//			return false;
+//		}
+		
+		if (!schedule.canAdd(c)) {
+			return false;
+		}
+		
+		if (schedule.getScheduleCredits() + c.getCredits() > maxCredits) {
+			return false;
+		}
+		
+		return true;
 	}
 }

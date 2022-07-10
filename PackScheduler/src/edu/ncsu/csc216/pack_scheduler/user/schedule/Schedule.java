@@ -122,4 +122,49 @@ public class Schedule {
 	public String getTitle() {
 		return title;
 	}
+	
+	/**
+	 * Returns cumulative sum of schedule credits.
+	 * @return cumulative sum of schedule credits
+	 */
+	public int getScheduleCredits() {
+		
+		int scheduleCredits = 0;
+		
+		for (int i = 0; i < schedule.size(); i++) {
+			scheduleCredits += schedule.get(i).getCredits();
+		}
+		
+		return scheduleCredits;
+	}
+	
+	/**
+	 * Returns whether a Course can be added to the Schedule.
+	 * 
+	 * @param c Course to be added
+	 * @return true if able, false if not
+	 */
+	public boolean canAdd(Course c) {
+		
+		if (c == null) {
+			return false;
+		}
+		
+		for (int i = 0; i < schedule.size(); i++) {
+			if (schedule.get(i).equals(c)) {
+				return false;
+			}
+		}
+		
+		for (int i = 0; i < schedule.size(); i++) {
+			
+			try {
+				schedule.get(i).checkConflict(c);
+			} catch (ConflictException e) {
+					return false;
+			}
+		}
+		
+		return true;
+	}
 }

@@ -4,6 +4,7 @@
 package edu.ncsu.csc216.pack_scheduler.user.schedule;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
@@ -151,5 +152,46 @@ public class ScheduleTest {
 
 		s.setTitle("Your Schedule");
 		assertEquals("Your Schedule", s.getTitle());
+	}
+	
+	/**
+	 * Tests Schedule.getScheduleCredits().
+	 */
+	@Test
+	public void testGetScheduleCredits() {
+		Schedule s = new Schedule();
+		
+		assertEquals(0, s.getScheduleCredits());
+		
+		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS_2, START_TIME_2, END_TIME_2);
+
+		s.addCourseToSchedule(c1);
+		s.addCourseToSchedule(c2);
+		
+		assertEquals(6, s.getScheduleCredits());
+	}
+	
+	/**
+	 * Tests Schedule.canAdd().
+	 */
+	@Test
+	public void testCanAdd() {
+		Schedule s = new Schedule();
+		
+		assertFalse(s.canAdd(null));
+		
+		Course c1 = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		
+		assertTrue(s.canAdd(c1));
+		
+		s.addCourseToSchedule(c1);
+
+		assertFalse(s.canAdd(c1));
+		
+		// now has same meeting days, start and end times as c1
+		Course c2 = new Course(NAME_2, TITLE_2, SECTION_2, CREDITS_2, INSTRUCTOR_ID_2, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+
+		assertFalse(s.canAdd(c2));
 	}
 }
