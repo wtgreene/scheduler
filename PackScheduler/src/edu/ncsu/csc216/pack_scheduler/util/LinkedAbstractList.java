@@ -155,11 +155,8 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			}
 		}
 		
-		else if (size == 1) {
-			
-			if (front.data.equals(element)) {
-				throw new IllegalArgumentException();
-			}
+		else if (size == 1 && front.data.equals(element)) {
+			throw new IllegalArgumentException();
 		}
 		
 		// parameter error checking - index out of range

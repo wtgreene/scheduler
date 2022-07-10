@@ -223,10 +223,6 @@ public class Student extends User implements Comparable<Student> {
 			return false;
 		}
 		
-		if (schedule.getScheduleCredits() + c.getCredits() > maxCredits) {
-			return false;
-		}
-		
-		return true;
+		return schedule.getScheduleCredits() + c.getCredits() <= maxCredits;
 	}
 }
