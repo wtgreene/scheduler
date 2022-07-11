@@ -6,4 +6,5 @@ Althea,Hicks,ahicks,Phasellus.dapibus@luctusfelis.com,MMlS+rEiw/l1nwKm2Vw3WLJGtP
 Zahir,King,zking,orci.Donec@ametmassaQuisque.com,MMlS+rEiw/l1nwKm2Vw3WLJGtP7iOZV7LU/uRuJhcMQ=,15
 Dylan,Nolan,dnolan,placerat.Cras.dictum@dictum.net,MMlS+rEiw/l1nwKm2Vw3WLJGtP7iOZV7LU/uRuJhcMQ=,5
 Rylee,Puckett,rpuckett,rpuckett@ncsu.edu,MMlS+rEiw/l1nwKm2Vw3WLJGtP7iOZV7LU/uRuJhcMQ=,15
+Cassandra,Schwartz,cschwartz,semper@imperdietornare.co.uk,MMlS+rEiw/l1nwKm2Vw3WLJGtP7iOZV7LU/uRuJhcMQ=,4
 Griffith,Stone,gstone,porta@magnamalesuadavel.net,MMlS+rEiw/l1nwKm2Vw3WLJGtP7iOZV7LU/uRuJhcMQ=,17
