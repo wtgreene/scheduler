@@ -40,7 +40,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			throw new IllegalArgumentException();
 		}
 		
-		// parameter error checking - less than 0
+		// parameter error checking - less than size
 		if (capacity < size) {
 			throw new IllegalArgumentException();
 		}
