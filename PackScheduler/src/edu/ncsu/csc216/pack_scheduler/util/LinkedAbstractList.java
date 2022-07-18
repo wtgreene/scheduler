@@ -16,6 +16,8 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	private int size;
 	/** capacity of list */
 	private int capacity;
+	/** bakc item of list */
+	private ListNode back;
 	
 	/**
 	 * Constructs a LinkedAbstractList object.
@@ -166,8 +168,15 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		
 		if (index == 0) {
 			
+			// no back needed
 			if (size == 0) {
 				front = new ListNode(element);
+			}
+			
+			// establishes front v. back
+			else if (size == 1) {
+				front = new ListNode(element, front);
+				back = front.next;
 			}
 			
 			else {
@@ -176,6 +185,15 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		}
 		
 		else {
+			
+			if (size == 1) {
+				back = new ListNode(element);
+				front.next = back;
+			}
+			
+			else if (index == size) {
+				back.next = new ListNode(element);
+			}
 			
 			ListNode current2 = front;
 
@@ -205,7 +223,18 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		
 		E rtn = null;
 		
-		if (index == 0) {
+		if (index == size - 1 && size > 1) {
+			ListNode current = front;
+			
+			for (int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			
+			rtn = current.next.data;
+			back = current.next;
+		}
+		
+		else if (index == 0) {
 			rtn = front.data;
 			front = front.next;
 		}
