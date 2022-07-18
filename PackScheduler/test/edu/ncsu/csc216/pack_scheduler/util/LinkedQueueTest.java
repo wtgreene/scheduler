@@ -107,4 +107,17 @@ class LinkedQueueTest<E> {
 		assertThrows(IllegalArgumentException.class, () -> a.setCapacity(-1));
 		assertThrows(IllegalArgumentException.class, () -> a.setCapacity(2));
 	}
+	
+	/**
+	 * Tests LinkedQueue.contains().
+	 */
+	@Test
+	void testContains() {
+		LinkedQueue<String> a = new LinkedQueue<String>(10);
+		
+		a.enqueue("a");
+		
+		assertTrue(a.contains("a"));
+		assertFalse(a.contains("b"));
+	}
 }

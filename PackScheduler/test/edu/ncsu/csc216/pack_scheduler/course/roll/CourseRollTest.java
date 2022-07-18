@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 
@@ -32,12 +33,33 @@ public class CourseRollTest {
 	/** Test Student's password */
 	private static final String PASSWORD = "password";
 	
+	/** Course name */
+	private static final String NAME = "CSC216";
+	/** Course title */
+	private static final String TITLE = "Software Development Fundamentals";
+	/** Course section */
+	private static final String SECTION = "001";
+	/** Course credits */
+	private static final int CREDITS = 3;
+	/** Course instructor id */
+	private static final String INSTRUCTOR_ID = "sesmith5";
+	/** Course meeting days */
+	private static final String MEETING_DAYS = "MW";
+	/** Course start time */
+	private static final int START_TIME = 1330;
+	/** Course end time */
+	private static final int END_TIME = 1445;
+
+	/** Course enrollment cap */
+	private static final int ENROLLMENT_CAP = 100;
+	
 	/**
 	 * Tests CourseRoll constructor.
 	 */
 	@Test
 	public void testCourseRoll() {
-		assertDoesNotThrow(() -> new CourseRoll(100));
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		assertDoesNotThrow(() -> c.getCourseRoll());
 	}
 	
 	/**
@@ -45,7 +67,8 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testGetEnrollmentCap() {
-		CourseRoll roll = new CourseRoll(100);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		CourseRoll roll = c.getCourseRoll();
 		assertEquals(100, roll.getEnrollmentCap());
 	}
 	
@@ -54,10 +77,12 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testSetEnrollmentCap() {
-		assertThrows(IllegalArgumentException.class, () -> new CourseRoll(9));
-		assertThrows(IllegalArgumentException.class, () -> new CourseRoll(251));
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
 		
-		CourseRoll roll = new CourseRoll(100);
+		assertThrows(IllegalArgumentException.class, () -> new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 9, MEETING_DAYS, START_TIME, END_TIME));
+		assertThrows(IllegalArgumentException.class, () -> new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 251, MEETING_DAYS, START_TIME, END_TIME));
+		
+		CourseRoll roll = c.getCourseRoll();
 		roll.setEnrollmentCap(11);
 		assertEquals(11, roll.getEnrollmentCap());
 		
@@ -97,7 +122,8 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testEnroll() {
-		CourseRoll roll = new CourseRoll(10);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 10, MEETING_DAYS, START_TIME, END_TIME);
+		CourseRoll roll = c.getCourseRoll();
 		
 		assertThrows(IllegalArgumentException.class, () -> roll.enroll(null));
 
@@ -140,7 +166,8 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testDrop() {
-		CourseRoll roll = new CourseRoll(100);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		CourseRoll roll = c.getCourseRoll();
 		
 		assertThrows(IllegalArgumentException.class, () -> roll.drop(null));
 
@@ -158,7 +185,8 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testGetOpenSeats() {
-		CourseRoll roll = new CourseRoll(10);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 10, MEETING_DAYS, START_TIME, END_TIME);
+		CourseRoll roll = c.getCourseRoll();
 		
 		assertEquals(10, roll.getOpenSeats());
 
@@ -198,7 +226,8 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testCanEnroll() {
-		CourseRoll roll = new CourseRoll(10);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 10, MEETING_DAYS, START_TIME, END_TIME);
+		CourseRoll roll = c.getCourseRoll();
 		
 		StudentDirectory sd = new StudentDirectory();
 		sd.loadStudentsFromFile("test-files/student_records.txt");
@@ -231,7 +260,13 @@ public class CourseRollTest {
 		roll.enroll(s10);
 		
 		Student s11 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD);
-				
+		
+		assertThrows(IllegalArgumentException.class, () -> roll.enroll(s11));
+		assertEquals(1, roll.getNumberOnWaitlist());
 		assertFalse(roll.canEnroll(s11));
+		
+		roll.drop(s5);
+		
+		assertEquals(0, roll.getNumberOnWaitlist());
 	}
 }

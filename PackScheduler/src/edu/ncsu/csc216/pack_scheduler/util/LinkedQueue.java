@@ -92,4 +92,21 @@ public class LinkedQueue<E> implements Queue<E> {
 		list.setCapacity(capacity);
 		this.capacity = capacity;
 	}
+	
+	/**
+	 * Returns whether an element is already in the queue.
+	 * 
+	 * @param element element to search for
+	 * @return whether an element is already in the queue
+	 */
+	public boolean contains(E element) {
+		
+		for (int i = 0; i < size(); i++) {
+			if (list.get(i).equals(element)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
