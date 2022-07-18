@@ -41,7 +41,7 @@ public class LinkedStack<E> implements Stack<E> {
 			throw new IllegalArgumentException();
 		}
 		
-		list.add(element);
+		list.add(0, element);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class LinkedStack<E> implements Stack<E> {
 			throw new EmptyStackException();
 		}
 		
-		return list.remove(size() - 1);
+		return list.remove(0);
 	}
 
 	/**
