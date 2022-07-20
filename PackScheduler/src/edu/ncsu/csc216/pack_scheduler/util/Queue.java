@@ -23,7 +23,7 @@ public interface Queue<E> {
 	 * Removes and returns the element at the front of the queue.
 	 * 
 	 * @return element at the front of the queue
-	 * @throws NoSuchElementException if stack is empty
+	 * @throws NoSuchElementException if queue is empty
 	 */
 	E dequeue();
 

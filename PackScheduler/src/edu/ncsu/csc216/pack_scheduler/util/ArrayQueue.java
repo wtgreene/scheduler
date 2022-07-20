@@ -3,7 +3,7 @@
  */
 package edu.ncsu.csc216.pack_scheduler.util;
 
-import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 /**
  * ArrayList that implements queue functionality.
@@ -48,13 +48,13 @@ public class ArrayQueue<E> implements Queue<E> {
 	 * Removes and returns the element at the front of the queue.
 	 * 
 	 * @return element at the front of the queue
-	 * @throws NoSuchElementException if stack is empty
+	 * @throws NoSuchElementException if queue is empty
 	 */
 	@Override
 	public E dequeue() {
 		
 		if (isEmpty()) {
-			throw new EmptyStackException();
+			throw new NoSuchElementException();
 		}
 		
 		return list.remove(0);
