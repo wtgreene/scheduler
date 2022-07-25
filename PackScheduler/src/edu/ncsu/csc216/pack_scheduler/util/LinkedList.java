@@ -5,6 +5,7 @@ package edu.ncsu.csc216.pack_scheduler.util;
 
 import java.util.AbstractSequentialList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 /**
  * Custom LinkedAbstractSequentialList class.
@@ -62,7 +63,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 	
 	
-
+	/**
+	 * Sets an element at an index to a new element.
+	 * 
+	 * @param index index of list
+	 * @param element element to set
+	 * @throws IllegalArgumentException if duplicate
+	 */
 	@Override
 	public E set(int index, E element) {
 		
@@ -174,9 +181,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		public E next() {
 			
 			if (!hasNext()) {
-				int i = 0;
-				i = i + 1;
-//				return NoSuchElementException();
+				throw new NoSuchElementException();
 			}
 			
 			lastRetrieved = next;
@@ -184,8 +189,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			previous = previous.next;
 			next = next.next;
 			
-			previousIndex++;
-			nextIndex++;
+			previousIndex = previousIndex() + 1;
+			nextIndex = nextIndex() + 1;
 			
 			return lastRetrieved.data;
 		}
@@ -208,9 +213,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		public E previous() {
 			
 			if (!hasPrevious()) {
-				int i = 0;
-				i = i + 1;
-//				return NoSuchElementException();
+				throw new NoSuchElementException();
 			}
 			
 			lastRetrieved = previous;
@@ -250,19 +253,14 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public void remove() {
 			
-			if (lastRetrieved == null) {
-				throw new IllegalStateException();
-			}
+			if (lastRetrieved == null) { throw new IllegalStateException(); }
 			
 			if (lastRetrieved.equals(previous)) {
 				previous.prev.next = next;
 				next.prev = previous.prev;
 			}
 			
-			if (lastRetrieved.equals(next)) {
-				next.next.prev = previous;
-				previous.next = next.next;
-			}
+			if (lastRetrieved.equals(next)) { next.next.prev = previous; previous.next = next.next; }
 			
 			lastRetrieved = null;
 			
@@ -278,13 +276,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public void set(E element) {
 			
-			if (lastRetrieved.data == null) {
-				throw new NullPointerException();
-			}
+			if (lastRetrieved.data == null) { throw new NullPointerException(); }
 			
-			if (lastRetrieved == null) {
-				throw new IllegalStateException();
-			}
+			if (lastRetrieved == null) { throw new IllegalStateException(); }
 			
 			lastRetrieved.data = element;
 		}

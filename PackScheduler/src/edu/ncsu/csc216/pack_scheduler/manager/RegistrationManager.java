@@ -136,9 +136,8 @@ public class RegistrationManager {
 
 		// registrar
 		if (registrar.getId().equals(id) && currentUser == null) {
-			String registrarPW = registrar.getPassword();
-
-			if (registrarPW.equals(password)) {
+			
+			if (registrar.getPassword().equals(hashPW(password))) {
 				currentUser = registrar;
 				return true;
 			}
@@ -149,7 +148,7 @@ public class RegistrationManager {
 
 			Student s = studentDirectory.getStudentById(id);
 
-			if (s.getPassword().equals(password)
+			if (s.getPassword().equals(hashPW(password))
 					&& (currentUser == null || currentUser.getId().equals(registrar.getId()))) {
 				currentUser = s;
 				return true;
@@ -161,7 +160,7 @@ public class RegistrationManager {
 
 			Faculty f = facultyDirectory.getFacultyById(id);
 
-			if (f.getPassword().equals(password)
+			if (f.getPassword().equals(hashPW(password))
 					&& (currentUser == null || currentUser.getId().equals(registrar.getId()))) {
 				currentUser = f;
 				return true;

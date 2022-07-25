@@ -84,7 +84,6 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testGetCourseCatalog() {
-		manager = RegistrationManager.getInstance();
 		assertDoesNotThrow(() -> manager.getCourseCatalog());
 	}
 
@@ -93,7 +92,6 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testGetStudentDirectory() {
-		manager = RegistrationManager.getInstance();
 		assertDoesNotThrow(() -> manager.getStudentDirectory());
 	}
 
@@ -101,9 +99,7 @@ public class RegistrationManagerTest {
 	 * Tests RegistrationManager.login().
 	 */
 	@Test
-	public void testLogin() {
-		manager = RegistrationManager.getInstance();
-				
+	public void testLogin() {				
 		Properties prop = new Properties();
 		try (InputStream input = new FileInputStream(PROP_FILE)) {
 			prop.load(input);
@@ -119,6 +115,10 @@ public class RegistrationManagerTest {
 		assertTrue(manager.login(ID, PASSWORD));
 		assertFalse(manager.login(ID_2, PASSWORD_2));
 		// new - end
+		
+		manager.logout();
+		manager.getFacultyDirectory().addFaculty(FIRST_NAME, EMAIL_2, ID, EMAIL, PASSWORD, PASSWORD, 2); // student info can work for faculty as well
+		assertTrue(manager.login(ID, PASSWORD));
 	}
 
 	/**
@@ -126,7 +126,6 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testLogout() {
-		manager = RegistrationManager.getInstance();
 		assertDoesNotThrow(() -> manager.logout());
 	}
 
@@ -135,7 +134,6 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testGetCurrentUser() {
-		manager = RegistrationManager.getInstance();
 		assertDoesNotThrow(() -> manager.getCurrentUser());
 	}
 	

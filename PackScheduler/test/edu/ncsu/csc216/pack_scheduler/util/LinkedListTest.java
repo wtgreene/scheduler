@@ -96,7 +96,7 @@ public class LinkedListTest {
 	@Test
 	public void testRemove() {
 		LinkedList<String> list = new LinkedList<String>();
-		
+				
 		// remove to yield empty list
 		list.add(0, "a");
 		list.remove(0);
@@ -131,6 +131,12 @@ public class LinkedListTest {
 		assertEquals(1, list.size());
 		assertEquals("c", list.get(0));
 		
+		LinkedList<String> list2 = new LinkedList<String>();
+
+		list2.add("a");
+		list2.remove("a");
+		assertEquals(0, list2.size());
+		
 //		assertThrows(IndexOutOfBoundsException.class, () -> list.get(1)); // size double-check
 		
 //		LinkedList<String> fruit = new LinkedList<String>();
@@ -158,7 +164,7 @@ public class LinkedListTest {
 		
 //		assertThrows(NullPointerException.class, () -> list.set(0, null)); // not sure if I need to implement this functionality
 		assertThrows(IllegalArgumentException.class, () -> list.set(0, "b")); // duplicate
-		assertThrows(NullPointerException.class, () -> list.set(3, "d"));
+		assertThrows(IndexOutOfBoundsException.class, () -> list.set(3, "d"));
 		assertThrows(IndexOutOfBoundsException.class, () -> list.set(4, "d"));
 
 		list.set(0, "A");
