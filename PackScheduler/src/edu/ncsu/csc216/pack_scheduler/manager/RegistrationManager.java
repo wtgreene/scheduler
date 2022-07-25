@@ -11,7 +11,9 @@ import java.util.Properties;
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
 import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.course.roll.CourseRoll;
+import edu.ncsu.csc216.pack_scheduler.directory.FacultyDirectory;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.User;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
@@ -29,6 +31,8 @@ public class RegistrationManager {
 	private CourseCatalog courseCatalog;
 	/** student directory */
 	private StudentDirectory studentDirectory;
+	/** faculty directory */
+	private FacultyDirectory facultyDirectory;
 	/** registrar user */
 	private User registrar;
 	/** current user */
@@ -46,6 +50,7 @@ public class RegistrationManager {
 		createRegistrar();
 		courseCatalog = new CourseCatalog();
 		studentDirectory = new StudentDirectory();
+		facultyDirectory = new FacultyDirectory();
 	}
 	
 	/**
@@ -110,6 +115,15 @@ public class RegistrationManager {
 	public StudentDirectory getStudentDirectory() {
 		return studentDirectory;
 	}
+	
+	/** 
+	 * Returns the faculty directory.
+	 * 
+	 * @return the faculty directory
+	 */
+	public FacultyDirectory getFacultyDirectory() {
+		return facultyDirectory;
+	}
 
 	/**
 	 * Logic for the login process.
@@ -119,37 +133,41 @@ public class RegistrationManager {
 	 * @return true if able to login, false if not
 	 */
 	public boolean login(String id, String password) {
-		if (id != null) {
-			String localId = id;
-			String localHashPW;
-			
-			if (password != null) {
-				String localPW = password;
-				localHashPW = hashPW(localPW);
 
-				if (registrar.getId().equals(localId) && currentUser == null) {
-					String registrarPW = registrar.getPassword();
+		// registrar
+		if (registrar.getId().equals(id) && currentUser == null) {
+			String registrarPW = registrar.getPassword();
 
-					if (registrarPW.equals(localHashPW)) {
-						currentUser = registrar;
-						localId = "";
-						return true;
-					}
-				}
-
-				if (studentDirectory.getStudentById(id) == null) {
-					return false;
-				}
-				
-				Student s = studentDirectory.getStudentById(id);
-
-				if (s.getPassword().equals(localHashPW) && (currentUser == null || currentUser.getId().equals(registrar.getId()))) {
-					currentUser = s;
-					return true;
-				}
+			if (registrarPW.equals(password)) {
+				currentUser = registrar;
+				return true;
 			}
 		}
-		
+
+		// student
+		if (studentDirectory.getStudentById(id) != null) {
+
+			Student s = studentDirectory.getStudentById(id);
+
+			if (s.getPassword().equals(password)
+					&& (currentUser == null || currentUser.getId().equals(registrar.getId()))) {
+				currentUser = s;
+				return true;
+			}
+		}
+
+		// faculty
+		if (facultyDirectory.getFacultyById(id) != null) {
+
+			Faculty f = facultyDirectory.getFacultyById(id);
+
+			if (f.getPassword().equals(password)
+					&& (currentUser == null || currentUser.getId().equals(registrar.getId()))) {
+				currentUser = f;
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -157,7 +175,6 @@ public class RegistrationManager {
 	 * Logs a User out.
 	 */
 	public void logout() {
-//		currentUser = registrar; 
 		currentUser = null; 
 	} 
 	
