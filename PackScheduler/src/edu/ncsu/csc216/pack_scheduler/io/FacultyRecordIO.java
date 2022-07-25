@@ -9,9 +9,9 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.User;
-import edu.ncsu.csc217.collections.list.SortedList;
+import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
 
 /**
  * Reads Course records from text files. Writes a set of CourseRecords to a
@@ -19,67 +19,68 @@ import edu.ncsu.csc217.collections.list.SortedList;
  * 
  * @author Will Greene
  */
-public class StudentRecordIO {
+public class FacultyRecordIO {
 
 	/**
-	 * Reads student records from a file and generates a list of valid Students. Any
-	 * invalid Students are ignored. If the file to read cannot be found or the
+	 * Reads Faculty records from a file and generates a list of valid Faculty. Any
+	 * invalid Faculty are ignored. If the file to read cannot be found or the
 	 * permissions are incorrect a File NotFoundException is thrown.
 	 * 
-	 * @param fileName file to read Student records from
-	 * @return a list of valid Student records
+	 * @param fileName file to read Faculty records from
+	 * @return a list of valid Faculty records
 	 * @throws FileNotFoundException if the file cannot be found or read
-	 * @throws IllegalArgumentException if fileReader cannot process Student
+	 * @throws IllegalArgumentException if fileReader cannot process Faculty
 	 */
-	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
+	public static LinkedList<Faculty> readFacultyRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName));
-		SortedList<Student> students = new SortedList<Student>();
+		LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
 		while (fileReader.hasNextLine()) {
 			try {
-				Student student = processStudent(fileReader.nextLine());
+				Faculty faculty = processFaculty(fileReader.nextLine());
 				boolean duplicate = false;
-				for (int i = 0; i < students.size(); i++) {
-					User current = students.get(i);
-					if (student.getId().equals(current.getId())) {
+				for (int i = 0; i < facultyList.size(); i++) {
+					User current = facultyList.get(i);
+					if (faculty.getId().equals(current.getId())) {
 						duplicate = true;
 						break;
 					}
 				}
 
 				if (!duplicate) {
-					students.add(student);
+					facultyList.add(faculty);
 				}
 			} catch (IllegalArgumentException e) {
-				// leave blank?
+				throw new IllegalArgumentException();
 			}
 		}
 
 		fileReader.close();
 
-		return students;
+		return facultyList;
 	}
 
 	/**
-	 * Reads a Student from a line of text.
+	 * Reads a Faculty from a line of text.
 	 * 
 	 * @param line line of text to be read
-	 * @return s Student object
+	 * @return s Faculty object
 	 * @throws IllegalArgumentException if invalid input file contents, no such
 	 *                                  element exception or input mismatch
 	 *                                  exception
 	 */
-	private static Student processStudent(String line) {
-		Student s = null;
+	private static Faculty processFaculty(String line) {
+		
 		Scanner lineScanner = new Scanner(line);
 		lineScanner.useDelimiter(",");
 
 		try {
+			
 			String firstName = lineScanner.next();
 			String lastName = lineScanner.next();
 			String id = lineScanner.next();
 			String email = lineScanner.next();
 			String password = lineScanner.next();
-			int maxCredits = lineScanner.nextInt();
+			int maxCourses = lineScanner.nextInt();
 
 			if (lineScanner.hasNext()) {
 				lineScanner.close();
@@ -87,8 +88,7 @@ public class StudentRecordIO {
 			}
 
 			lineScanner.close();
-			s = new Student(firstName, lastName, id, email, password, maxCredits);
-			return s;
+			return new Faculty(firstName, lastName, id, email, password, maxCourses);
 
 		} catch (InputMismatchException e) {
 			throw new IllegalArgumentException("No Such Element Exception.");
@@ -98,17 +98,22 @@ public class StudentRecordIO {
 	}
 
 	/**
-	 * Writes the given list of Students to a file.
+	 * Writes the given list of Faculty to a file.
 	 * 
-	 * @param fileName         file to write schedule of Students to
-	 * @param studentDirectory list of Students to write
+	 * @param fileName         file to write schedule of Faculty to
+	 * @param facultyDirectory list of Faculty to write
 	 * @throws IOException if cannot write to file
 	 */
-	public static void writeStudentRecords(String fileName, SortedList<Student> studentDirectory) throws IOException {
+	public static void writeFacultyRecords(String fileName, LinkedList<Faculty> facultyDirectory) throws IOException {
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 
-		for (int i = 0; i < studentDirectory.size(); i++) {
-			fileWriter.println(studentDirectory.get(i).toString());
+		for (int i = 0; i < facultyDirectory.size(); i++) {
+			
+			if (i != 0) {
+				fileWriter.println();
+			}
+			
+			fileWriter.print(facultyDirectory.get(i).toString());
 		}
 
 		fileWriter.close();

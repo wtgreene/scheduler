@@ -6,7 +6,7 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +51,7 @@ class ArrayQueueTest<E> {
 	void testDequeue() {
 		ArrayQueue<String> a = new ArrayQueue<String>(10);
 		
-		assertThrows(EmptyStackException.class, () -> a.dequeue());
+		assertThrows(NoSuchElementException.class, () -> a.dequeue());
 		
 		a.enqueue("a");
 		a.enqueue("b");

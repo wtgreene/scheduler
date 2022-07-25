@@ -121,5 +121,4 @@ public class StudentTest {
 		assertFalse(s.canAdd(c3));
 		assertTrue(s.canAdd(c4));
 	}
-
 }
