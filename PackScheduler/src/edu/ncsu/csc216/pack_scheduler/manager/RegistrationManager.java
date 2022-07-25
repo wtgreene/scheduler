@@ -135,12 +135,10 @@ public class RegistrationManager {
 	public boolean login(String id, String password) {
 
 		// registrar
-		if (registrar.getId().equals(id) && currentUser == null) {
-			
-			if (registrar.getPassword().equals(hashPW(password))) {
-				currentUser = registrar;
-				return true;
-			}
+		if (registrar.getId().equals(id) && registrar.getPassword().equals(hashPW(password)) && currentUser == null) {
+
+			currentUser = registrar;
+			return true;
 		}
 
 		// student

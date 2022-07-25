@@ -46,7 +46,7 @@ public class Faculty extends User {
 
 		// throw exception if outside of credit range
 		if (maxCourses < MIN_COURSES || maxCourses > MAX_COURSES) {
-			throw new IllegalArgumentException("Invalid max courses.");
+			throw new IllegalArgumentException("Invalid max courses");
 		}
 
 		this.maxCourses = maxCourses;
