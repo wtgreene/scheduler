@@ -5,6 +5,8 @@ package edu.ncsu.csc216.pack_scheduler.user;
 
 import java.util.Objects;
 
+import edu.ncsu.csc216.pack_scheduler.user.schedule.FacultySchedule;
+
 /**
  * Assembles information for a Faculty
  * 
@@ -19,6 +21,8 @@ public class Faculty extends User {
 
 	/** Faculty's max courses */
 	private int maxCourses;
+	/** schedule */
+	private FacultySchedule schedule;
 
 	/**
 	 * Constructs a Faculty object with values for all fields.
@@ -33,6 +37,7 @@ public class Faculty extends User {
 	public Faculty(String firstName, String lastName, String id, String email, String password, int maxCourses) {
 		super(firstName, lastName, id, email, password);
 		setMaxCourses(maxCourses);
+		schedule = new FacultySchedule(id);
 	}
 
 	/**
@@ -101,5 +106,21 @@ public class Faculty extends User {
 	public String toString() {
 		return getFirstName() + "," + getLastName() + "," + getId() + "," + getEmail() + "," + getPassword() + ","
 				+ maxCourses;
+	}
+	
+	/**
+	 * Returns Faculty Schedule.
+	 * @return Faculty Schedule
+	 */
+	public FacultySchedule getSchedule() {
+		return schedule;
+	}
+	
+	/**
+	 * Returns whether number of scheduled courses is greater than maxCourses.
+	 * @return true if overloaded, false if not
+	 */
+	public boolean isOverloaded() {
+		return getSchedule().getNumScheduledCourses() > getMaxCourses();
 	}
 }

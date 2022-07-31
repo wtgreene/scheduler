@@ -278,22 +278,24 @@ public class CourseTest {
 				() -> assertEquals(START_TIME, c.getStartTime(), "incorrect start time"),
 				() -> assertEquals(END_TIME, c.getEndTime(), "incorrect end time"));
 	}
+	
+	// Deleted - null instructorId now allowed
 
-	/**
-	 * Tests setInstructorId with invalid input.
-	 * 
-	 * @param invalid invalid input for the test
-	 */
-	@ParameterizedTest
-	@NullAndEmptySource
-	public void testSetInstructorIdInvalid(String invalid) {
-		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME,
-				END_TIME);
-
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> c.setInstructorId(invalid));
-		assertEquals("Invalid instructor id.", exception.getMessage(),
-				"Incorrect exception thrown with invalid input - " + invalid);
-	}
+//	/**
+//	 * Tests setInstructorId with invalid input.
+//	 * 
+//	 * @param invalid invalid input for the test
+//	 */
+//	@ParameterizedTest
+//	@NullAndEmptySource
+//	public void testSetInstructorIdInvalid(String invalid) {
+//		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENROLLMENT_CAP, MEETING_DAYS, START_TIME,
+//				END_TIME);
+//
+//		Exception exception = assertThrows(IllegalArgumentException.class, () -> c.setInstructorId(invalid));
+//		assertEquals("Invalid instructor id.", exception.getMessage(),
+//				"Incorrect exception thrown with invalid input - " + invalid);
+//	}
 
 	/**
 	 * Tests setMeetingDaysAndTime().

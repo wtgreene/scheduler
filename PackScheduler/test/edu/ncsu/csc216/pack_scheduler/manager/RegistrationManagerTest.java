@@ -11,7 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
+import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
 
@@ -47,6 +49,24 @@ public class RegistrationManagerTest {
 	private static final String PASSWORD_2 = "password2";
 	/** 2nd student's max credits */
 	private static final int MAX_CREDITS_2 = 16;
+	
+	/** Course name */
+	private static final String NAME = "CSC216";
+	/** Course title */
+	private static final String TITLE = "Software Development Fundamentals";
+	/** Course section */
+	private static final String SECTION = "001";
+	/** Course credits */
+	private static final int CREDITS = 3;
+	/** Course meeting days */
+	private static final String MEETING_DAYS = "MW";
+	/** Course start time */
+	private static final int START_TIME = 1330;
+	/** Course end time */
+	private static final int END_TIME = 1445;
+
+	/** Course enrollment cap */
+	private static final int ENROLLMENT_CAP = 100;
 	
 	/** Instance for RegistrationManager */
 	private RegistrationManager manager;
@@ -344,6 +364,59 @@ public class RegistrationManagerTest {
 		assertEquals(0, scheduleHicksArray.length, "User: ahicks\nCourse: CSC216-001, CSC226-001, CSC116-003, removed CSC226-001, CSC216-001, CSC116-003\n");
 		
 		manager.logout();
+	}
+	
+	/**
+	 * Tests RegistrationManager.addFacultyToCourse().
+	 */
+	@Test
+	public void testAddFacultyToCourse() {
+		manager.login(registrarUsername, registrarPassword);
+		
+		Faculty f = new Faculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, 2);
+		manager.getFacultyDirectory().addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, null, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		manager.addFacultyToCourse(c, f);
+		
+		assertEquals(ID, c.getInstructorId());
+		assertEquals(1, f.getSchedule().getNumScheduledCourses());
+	}
+	
+	/**
+	 * Tests RegistrationManager.removeFacultyFromCourse().
+	 */
+	@Test
+	public void testRemoveFacultyFromCourse() {
+		manager.login(registrarUsername, registrarPassword);
+		
+		Faculty f = new Faculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, 2);
+		manager.getFacultyDirectory().addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, null, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		manager.addFacultyToCourse(c, f);
+		manager.removeFacultyFromCourse(c, f);
+		
+		assertEquals(null, c.getInstructorId());
+		assertEquals(0, f.getSchedule().getNumScheduledCourses());
+	}
+	
+	/**
+	 * Tests RegistrationManager.resetFacultySchedule().
+	 */
+	@Test
+	public void testResetFacultySchedule() {
+		manager.login(registrarUsername, registrarPassword);
+		
+		Faculty f = new Faculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, 2);
+		manager.getFacultyDirectory().addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, null, ENROLLMENT_CAP, MEETING_DAYS, START_TIME, END_TIME);
+		manager.addFacultyToCourse(c, f);
+		
+		manager.resetFacultySchedule(f);
+		
+		assertEquals(0, f.getSchedule().getNumScheduledCourses());
 	}
 	
 	/**

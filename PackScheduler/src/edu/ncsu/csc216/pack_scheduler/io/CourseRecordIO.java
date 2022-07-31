@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.pack_scheduler.course.Course;
+import edu.ncsu.csc216.pack_scheduler.manager.RegistrationManager;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
@@ -79,11 +81,13 @@ public class CourseRecordIO {
 	 *                                  exception
 	 */
 	private static Course readCourse(String line) {
+		
 		Course c = null;
 		Scanner lineScanner = new Scanner(line);
 		lineScanner.useDelimiter(",");
 
 		try {
+			
 			String name = lineScanner.next();
 			String title = lineScanner.next();
 			String section = lineScanner.next();
@@ -99,7 +103,22 @@ public class CourseRecordIO {
 				}
 
 				lineScanner.close();
-				c = new Course(name, title, section, credits, instructorId, enrollmentCap, meetingDays);
+				c = new Course(name, title, section, credits, null, enrollmentCap, meetingDays);
+				
+				Faculty f = null;
+				
+				try {
+					
+					f = RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(instructorId);
+					
+					if (f != null) {
+						f.getSchedule().addCourseToSchedule(c);
+					}
+					
+				} catch (Exception e) {
+					throw new IllegalArgumentException("Cannot attached faculty to course.");
+				}
+				
 				return c;
 			}
 
@@ -113,7 +132,22 @@ public class CourseRecordIO {
 				}
 
 				lineScanner.close();
-				c = new Course(name, title, section, credits, instructorId, enrollmentCap, meetingDays, startTime, endTime);
+				
+				Faculty f = null;
+				
+				try {
+					
+					f = RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(instructorId);
+					
+					if (f != null) {
+						f.getSchedule().addCourseToSchedule(c);
+					}
+					
+				} catch (Exception e) {
+					throw new IllegalArgumentException("Cannot attached faculty to course.");
+				}
+				
+				c = new Course(name, title, section, credits, null, enrollmentCap, meetingDays, startTime, endTime);
 				return c;
 			}
 

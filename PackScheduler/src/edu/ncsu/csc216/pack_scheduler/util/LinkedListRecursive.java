@@ -123,7 +123,7 @@ public class LinkedListRecursive<E> {
 	public boolean remove(E element) {
 
 		if (element == null) {
-			throw new NullPointerException();
+			return false;
 		}
 
 		if (isEmpty()) {
