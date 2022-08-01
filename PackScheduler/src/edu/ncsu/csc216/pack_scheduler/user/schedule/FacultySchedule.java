@@ -31,10 +31,10 @@ public class FacultySchedule {
 	 */
 	public boolean addCourseToSchedule(Course course) {
 		for (int i = 0; i < schedule.size(); i++) {
-			if (schedule.get(i).isDuplicate(course)) {
-				if (schedule.get(i).getSection().equals(course.getSection())) {
-					throw new IllegalArgumentException("Already assigned " + course.getName());
-				}
+			
+			// PMD Error. Solution - combined conditionals.
+			if (schedule.get(i).isDuplicate(course) && schedule.get(i).getSection().equals(course.getSection())) {
+				throw new IllegalArgumentException("Already assigned " + course.getName());
 			}
 			try {
 				schedule.get(i).checkConflict(course);
