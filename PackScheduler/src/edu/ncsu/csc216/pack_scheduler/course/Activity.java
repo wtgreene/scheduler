@@ -269,6 +269,9 @@ public abstract class Activity implements Conflict {
 		return endTime == other.endTime && Objects.equals(meetingDays, other.meetingDays)
 				&& startTime == other.startTime && Objects.equals(title, other.title);
 	}
+	
+	// Why does a Conflict interface exist (which is overridden below) instead of having this method only?
+	// Is there a predefined checkConflict() method in a package used in this class?
 
 	/**
 	 * Checks for a time conflict.
